@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/es6f.iml" filepath="$PROJECT_DIR$/.idea/es6f.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/alef.iml" filepath="$PROJECT_DIR$/.idea/alef.iml" />
     </modules>
   </component>
 </project>
