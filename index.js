@@ -1,7 +1,9 @@
 import { identity } from './src/identity';
 import { map } from './src/map';
+import { unless } from './src/unless';
 
-export {
+export default {
     identity,
     map,
+    unless,
 }
