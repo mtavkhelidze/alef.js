@@ -9,13 +9,19 @@
  * Copyright (c) 2017 Misha Tavkhelidze
  */
 
+import { List } from 'immutable';
+
 const times = (fn, n) => {
-    let xs = [];
+    const xs = List().asMutable();
     for (let i = 0; i < n; i++) {
         xs.push(fn(i));
     }
-    return xs;
+    return xs.asImmutable();
 };
+
+// const _times = (fn, n, xs) =>
+//
+// const times = (fn, n) => _times(fn, n, List());
 
 export {
     times,
