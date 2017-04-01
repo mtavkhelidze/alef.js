@@ -4,7 +4,8 @@
   "description": "ES6 Functional Library",
   "main": "index.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "test:watch": "ava -v --watch"
   },
   "author": "Misha Tavkhelidze <misha.tavkhelidze@gmail.com>",
   "license": "ISC",
