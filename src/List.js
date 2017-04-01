@@ -5,6 +5,9 @@ class Node {
     }
 }
 class List {
+    constructor(arg) {
+        this._head = arg;
+    }
     head() {
         return this._head;
     }
