@@ -16,13 +16,10 @@ const times = (fn, n) => {
     for (let i = 0; i < n; i++) {
         xs.push(fn(i));
     }
+
     return xs.asImmutable();
 };
 
-// const _times = (fn, n, xs) =>
-//
-// const times = (fn, n) => _times(fn, n, List());
-
 export {
     times,
-}
+};

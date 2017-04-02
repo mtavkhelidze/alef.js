@@ -12,4 +12,4 @@ const unless = (predicate, fn, x) => predicate ? x : fn(x);
 
 export {
     unless,
-}
+};
