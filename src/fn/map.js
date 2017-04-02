@@ -1,8 +1,8 @@
 /**
- * File map.js is part of alef.js library.
+ * map.js
  *
+ * This file is part of alef.js.
  * Written by Misha Tavkhelidze <misha.tavkhelidze@gmail.com>
- *
  * Copyright (c) 2017 Misha Tavkhelidze
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
