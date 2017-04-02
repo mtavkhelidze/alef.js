@@ -14,7 +14,7 @@ class List {
         this.__populate(xs);
         this[Symbol.iterator] = this.__iter;
     }
-
+    
     __populate(xs) {
         const len = xs.length;
         for (let i = len - 1; i >= 0; i -= 1) {
