@@ -1,7 +1,8 @@
 /**
  * index.js
  *
- * This file is part of alef.
+ * This file is part of alef.js.
+ *
  * Written by Misha Tavkhelidze <misha.tavkhelidze@gmail.com>
  * Copyright (c) 2017 Misha Tavkhelidze
  *
