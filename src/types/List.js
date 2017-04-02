@@ -28,7 +28,6 @@
 /* eslint-disable no-underscore-dangle */
 
 class Node {
-
     constructor(value, next = null) {
         this.value = value;
         this.next = next || null;
@@ -41,13 +40,28 @@ class List {
         this.length = 0;
 
         // Private stuff.
-        this.__root = null;
-        if (xs.length === 1 && Array.isArray(xs[0])) {
-            this.__populate(xs[0]);
-        } else {
-            this.__populate(xs);
-        }
+        this.__head = null;
         this[Symbol.iterator] = this.__iter;
+
+        if (xs.length > 0) {
+            if (xs.length === 1 && Array.isArray(xs[0])) {
+                this.__populate(xs[0]);
+            } else {
+                this.__populate(xs);
+            }
+        }
+    }
+
+    head() {
+        return this.__head ? this.__head.value : undefined;
+    }
+
+    at(ix) {
+        let tmp = this.__head;
+        for (let i = ix; i > 0; i--) {
+            tmp = tmp.next;
+        }
+        return tmp.value;
     }
 
     __populate(xs) {
@@ -70,11 +84,6 @@ class List {
             tmp = tmp.next;
         }
     }
-
-    head() {
-        return this.__head ? this.__head.value : undefined;
-    }
-
 }
 
 export {

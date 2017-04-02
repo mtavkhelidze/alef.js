@@ -49,20 +49,30 @@ test('is iterable in correct order', t => {
     const etalon = [1, '0xdeadbeef'];
     const result = [];
     const xs = new List(1, '0xdeadbeef');
+
     for (const x of xs) {
         result.push(x);
     }
+
     for (let i = 0; i < result.length; i += 1) {
         t.true(result[i] === etalon[i]);
     }
 });
 
 test('can be initialize from Array', t => {
-    const l = new List([1,2,3])
-    t.is(l.head(), 1);
+    const xs = new List([1, 2, 3]);
+    t.is(xs.head(), 1);
 });
 
 test('has length', t => {
-    const l = new List(1,2,3);
-    t.is(l.length, 3);
+    const xs = new List(1, 2, 3);
+    t.is(xs.length, 3);
 });
+
+test('has #at access method', t => {
+    const xs = new List(1, 2, 3);
+    t.is(xs.at(0), 1);
+    t.is(xs.at(1), 2);
+    t.is(xs.at(2), 3);
+});
+
