@@ -27,6 +27,7 @@
 /* eslint-disable no-underscore-dangle */
 
 class Node {
+
     constructor(value, next = null) {
         this.value = value;
         this.next = next || null;
@@ -35,7 +36,11 @@ class Node {
 
 class List {
     constructor(...xs) {
-        this.__populate(xs);
+        if (xs.length === 1 && Array.isArray(xs[0])) {
+            this.__populate(xs[0]);
+        } else {
+            this.__populate(xs);
+        }
         this[Symbol.iterator] = this.__iter;
     }
 

@@ -55,3 +55,8 @@ test('is iterable in correct order', t => {
         t.true(result[i] === etalon[i]);
     }
 });
+
+test('can be initialize from Array', t => {
+    const l = new List([1,2,3])
+    t.is(l.head(), 1);
+})
