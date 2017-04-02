@@ -1,7 +1,8 @@
 /**
  * index.js
  *
- * This file is part of alef.
+ * This file is part of alef.js.
+ *
  * Written by Misha Tavkhelidze <misha.tavkhelidze@gmail.com>
  * Copyright (c) 2017 Misha Tavkhelidze
  *
@@ -24,12 +25,8 @@
  * SOFTWARE.
  */
 
-import 'babel-polyfill';
+import { List } from './List';
 
-import * as types from './src/ds';
-import * as functions from './src/fn';
-
-export default {
-    types,
-    functions
-};
+export {
+    List
+}
