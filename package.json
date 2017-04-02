@@ -4,7 +4,8 @@
   "description": "ES6 Functional Library",
   "main": "index.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "test:watch": "ava -v --watch"
   },
   "author": "Misha Tavkhelidze <misha.tavkhelidze@gmail.com>",
   "license": "ISC",
@@ -12,11 +13,20 @@
     "url": "https://mtavkhelidze@bitbucket.org/mtavkhelidze/alef.git",
     "type": "git"
   },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0"
+  },
   "devDependencies": {
     "ava": "^0.18.2",
     "babel-cli": "^6.24.0",
-    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-latest": "^6.24.0",
+    "immutable": "^3.8.1",
     "sinon": "^2.0.0"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
   },
   "ava": {
     "require": [

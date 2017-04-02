@@ -10,10 +10,12 @@
 
 const map = (fn, xs) => {
     const len = xs.length;
-    let rxs = Array(len);
-    for(let i = 0, len = xs.length; i < len; i++) {
+    const rxs = new Array(len);
+
+    for (let i = 0; i < len; i += 1) {
         rxs[i] = fn(xs[i], i);
     }
+
     return rxs;
 };
 

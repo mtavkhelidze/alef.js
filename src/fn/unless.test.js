@@ -13,18 +13,18 @@ import { unless } from './unless';
 
 const fn = sinon.spy();
 
-test('expects 3 arguments', t => {
+test('expects 3 arguments', (t) => {
     t.is(unless.length, 3);
 });
 
-test('calls `fn` if predicate is false', t => {
+test('calls `fn` if predicate is false', (t) => {
     const arg = '0xdeadbeef';
     unless(false, fn, arg);
     t.is(fn.callCount, 1);
     t.is(fn.firstCall.args[0], arg);
 });
 
-test('does not call`fn` if predicate is true', t => {
+test('does not call`fn` if predicate is true', (t) => {
     fn.reset();
     unless(true, fn, null);
     t.is(fn.callCount, 0);
