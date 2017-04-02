@@ -36,6 +36,11 @@ class Node {
 
 class List {
     constructor(...xs) {
+        // Public properties
+        this.length = 0;
+
+        // Private stuff.
+        this.__root = null;
         if (xs.length === 1 && Array.isArray(xs[0])) {
             this.__populate(xs[0]);
         } else {
@@ -50,6 +55,7 @@ class List {
             const nx = new Node(xs[i]);
             nx.next = this.__head;
             this.__head = nx;
+            this.length += 1;
         }
     }
 

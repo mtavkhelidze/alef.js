@@ -59,4 +59,9 @@ test('is iterable in correct order', t => {
 test('can be initialize from Array', t => {
     const l = new List([1,2,3])
     t.is(l.head(), 1);
-})
+});
+
+test('has length', t => {
+    const l = new List(1,2,3);
+    t.is(l.length, 3);
+});
