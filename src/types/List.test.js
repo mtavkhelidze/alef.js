@@ -28,6 +28,7 @@
 import test from 'ava';
 import { List } from './List';
 
+// eslint-disable-next-line no-unused-vars
 const log = console.log.bind(console);
 
 test('#head of empty returns undefined', t => {
@@ -35,12 +36,12 @@ test('#head of empty returns undefined', t => {
     t.is(undefined, xs.head());
 });
 
-test('with one number #head returns that number', t => {
+test('#head returns first number', t => {
     const xs = new List(1);
     t.is(1, xs.head());
 });
 
-test('with one string #head returns that string', t => {
+test('#head returns first string', t => {
     const xs = new List('0xdeadbeef');
     t.is('0xdeadbeef', xs.head());
 });
@@ -59,20 +60,26 @@ test('is iterable in correct order', t => {
     }
 });
 
-test('can be initialize from Array', t => {
+test('can be initialized from Array', t => {
     const xs = new List([1, 2, 3]);
     t.is(xs.head(), 1);
 });
 
-test('has length', t => {
+test('has length property', t => {
     const xs = new List(1, 2, 3);
     t.is(xs.length, 3);
 });
 
-test('has #at access method', t => {
+test('#at(index) returns element at index', t => {
     const xs = new List(1, 2, 3);
     t.is(xs.at(0), 1);
     t.is(xs.at(1), 2);
     t.is(xs.at(2), 3);
 });
 
+test('#push adds an element to the top', t => {
+    const xs = new List(1, 2, 3, 4);
+    const nxs = xs.push(6);
+    t.is(xs.head(), 1);
+    t.is(nxs.head(), 6);
+});

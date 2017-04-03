@@ -27,6 +27,11 @@
 
 /* eslint-disable no-underscore-dangle */
 
+import assert from 'assert';
+
+/**
+ * Internal class.
+ */
 class Node {
     constructor(value, next = null) {
         this.value = value;
@@ -34,13 +39,38 @@ class Node {
     }
 }
 
+/**
+ * Immutable singly-linked list.
+ */
 class List {
+    /**
+     * Creates instance of List
+     *
+     * @constructor
+     * @this {List}
+     * @param {any|array} xs arguments or an Array
+     */
     constructor(...xs) {
-        // Public properties
+        /**
+         * Length of the list
+         *
+         * @type {number}
+         */
         this.length = 0;
 
-        // Private stuff.
+        /**
+         * List head
+         *
+         * @type {Node}
+         * @private
+         */
         this.__head = null;
+
+        /**
+         * List iterator function
+         *
+         * @type {function}
+         */
         this[Symbol.iterator] = this.__iter;
 
         if (xs.length > 0) {
@@ -52,18 +82,51 @@ class List {
         }
     }
 
+    /**
+     * Returns new List with `x` added to the top.
+     *
+     * @param x
+     * @returns {List}
+     */
+    push(x) {
+        const nl = new List();
+        nl.__head = new Node(x);
+        nl.__head.next = this.__head;
+        nl.length = this.length + 1;
+        return nl;
+    }
+
+    /**
+     * Inspect the first element of the list.
+     *
+     * @returns {any|undefined} value of the first element or undefined if
+     * the list is empty
+     */
     head() {
         return this.__head ? this.__head.value : undefined;
     }
 
+    /**
+     * Return element at position `ix`.
+     *
+     * @param ix positive integer
+     * @returns {any}
+     */
     at(ix) {
+        assert(ix >= 0);
         let tmp = this.__head;
-        for (let i = ix; i > 0; i--) {
+        for (let i = ix; i > 0; i -= 1) {
             tmp = tmp.next;
         }
         return tmp.value;
     }
 
+    /**
+     * Populates List with elements of `xs`
+     *
+     * @param {array} xs
+     * @private
+     */
     __populate(xs) {
         const len = xs.length;
         for (let i = len - 1; i >= 0; i -= 1) {
@@ -74,6 +137,10 @@ class List {
         }
     }
 
+    /**
+     * Iterator for `for of` constructs.
+     * @private
+     */
     * __iter() {
         let tmp = this.__head;
         while (tmp !== null) {

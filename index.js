@@ -30,7 +30,7 @@ import 'babel-polyfill';
 import * as types from './src/types';
 import * as functions from './src/fn';
 
-export default {
+export {
     types,
     functions
 };
