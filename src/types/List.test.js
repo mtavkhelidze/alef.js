@@ -81,5 +81,8 @@ test('#push adds an element to the top', t => {
     const xs = new List(1, 2, 3, 4);
     const nxs = xs.push(6);
     t.is(xs.head(), 1);
+    t.is(xs.length, 4)
     t.is(nxs.head(), 6);
+    t.is(nxs.length, 5)
 });
+
