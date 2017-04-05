@@ -80,6 +80,13 @@ test('#at(index) returns element at index', t => {
     t.is(xs.at(2), 3);
 });
 
+test('#at throws RangeError on invalid index', t => {
+    const xs = List();
+    t.throws(() => {
+        xs.at(10);
+    }, RangeError);
+});
+
 test('#push adds an element to the top', t => {
     const xs = List(1, 2, 3, 4);
     const nxs = xs.push(6);

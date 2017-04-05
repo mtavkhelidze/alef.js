@@ -150,8 +150,8 @@ class List {
      * @returns {*}
      */
     at(ix) {
-        if (ix < 0 && ix >= this.length) {
-            throw IndexOutOfBounds;
+        if (ix < 0 || ix >= this.length) {
+            throw new RangeError('Index out of bounds.');
         }
         let tmp = this.__head;
         for (let i = ix; i > 0; i -= 1) {
