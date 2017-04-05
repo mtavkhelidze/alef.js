@@ -28,9 +28,7 @@
 import 'babel-polyfill';
 
 import * as types from './src/immutable';
-import * as functions from './src/fn';
 
 export {
-    types,
-    functions
+    types
 };
