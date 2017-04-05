@@ -32,26 +32,26 @@ import { List } from './List';
 const log = console.log.bind(console);
 
 test('#head of empty throws an Error', t => {
-    const xs = new List();
+    const xs = List();
     t.throws(() => {
         xs.head();
     }, Error);
 });
 
 test('#head returns first number', t => {
-    const xs = new List(1);
+    const xs = List(1);
     t.is(1, xs.head());
 });
 
 test('#head returns first string', t => {
-    const xs = new List('0xdeadbeef');
+    const xs = List('0xdeadbeef');
     t.is('0xdeadbeef', xs.head());
 });
 
 test('is iterable in correct order', t => {
     const etalon = [1, '0xdeadbeef'];
     const result = [];
-    const xs = new List(1, '0xdeadbeef');
+    const xs = List(1, '0xdeadbeef');
 
     // eslint-disable-next-line no-restricted-syntax
     for (const x of xs) {
@@ -64,28 +64,33 @@ test('is iterable in correct order', t => {
 });
 
 test('can be initialized from Array', t => {
-    const xs = new List([1, 2, 3]);
+    const xs = List([1, 2, 3]);
     t.is(xs.head(), 1);
+    t.is(xs.length, 3);
 });
 
 test('has length property', t => {
-    const xs = new List(1, 2, 3);
+    const xs = List(1, 2, 3);
     t.is(xs.length, 3);
 });
 
 test('#at(index) returns element at index', t => {
-    const xs = new List(1, 2, 3);
+    const xs = List(1, 2, 3);
     t.is(xs.at(0), 1);
     t.is(xs.at(1), 2);
     t.is(xs.at(2), 3);
 });
 
 test('#push adds an element to the top', t => {
-    const xs = new List(1, 2, 3, 4);
+    const xs = List(1, 2, 3, 4);
     const nxs = xs.push(6);
     t.is(xs.head(), 1);
     t.is(xs.length, 4);
     t.is(nxs.head(), 6);
     t.is(nxs.length, 5);
+});
+
+test('#concat returns a concatenated list', t => {
+    const l1 = List(1,2,3);
 });
 

@@ -38,25 +38,26 @@ class Node {
         this.next = next || null;
     }
 }
+
 /**
- * Scala style immutable list.
+ * Scala style immutable _List.
  */
-class List {
+class _List {
     /**
-     * Creates instance of List
+     * Creates instance of _List
      *
      * @param {...*} [xs] arguments or an Array
      */
     constructor(...xs) {
         /**
-         * Length of the list
+         * Length of the _List
          *
          * @type {number}
          */
         this.length = 0;
 
         /**
-         * List head
+         * _List head
          *
          * @type {Node}
          * @private
@@ -64,7 +65,7 @@ class List {
         this.__head = null;
 
         /**
-         * List iterator function
+         * _List iterator function
          *
          * @type {function}
          */
@@ -80,13 +81,13 @@ class List {
     }
 
     /**
-     * Returns new List with `x` added to the top.
+     * Returns new _List with `x` added to the top.
      *
      * @param x
-     * @returns {List}
+     * @returns {_List}
      */
     push(x) {
-        const nl = new List();
+        const nl = new _List();
         nl.__head = new Node(x);
         nl.__head.next = this.__head;
         nl.length = this.length + 1;
@@ -94,17 +95,17 @@ class List {
     }
 
     /**
-     * Inspect the first element of the list.
+     * Inspect the first element of the _List.
      *
      * @returns {*} value of the first element or undefined if
-     * the list is empty
-     * @throws {Error} if the list is empty
+     * the _List is empty
+     * @throws {Error} if the _List is empty
      */
     head() {
         if (this.__head) {
             return this.__head.value
         }
-        throw new Error('The list is empty');
+        throw new Error('The _List is empty');
     }
 
     /**
@@ -123,7 +124,7 @@ class List {
     }
 
     /**
-     * Populates List with elements of `xs`
+     * Populates _List with elements of `xs`
      *
      * @param {array} xs
      * @private
@@ -145,15 +146,15 @@ class List {
     * __iter() {
         let tmp = this.__head;
         while (tmp !== null) {
-            if (!tmp) {
-                break;
-            }
             yield tmp.value;
             tmp = tmp.next;
         }
     }
 }
 
+const List = (...args) => new _List(...args);
+
 export {
     List
 };
+
