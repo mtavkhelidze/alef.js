@@ -34,7 +34,7 @@ test('#head of empty throws an Error', t => {
     const xs = List();
     t.throws(() => {
         xs.head();
-    }, Error);
+    }, RangeError);
 });
 
 test('#head returns first number', t => {
@@ -89,11 +89,10 @@ test('#push adds an element to the top', t => {
     t.is(nxs.length, 5);
 });
 
-test.skip('#concat returns a concatenated list', t => {
-    const l1 = List(1, 2, 3);
-    const l2 = List(-2, -1, 0);
-    const l = l2.concat(l1);
-    t.is(l.head(), l2.head());
-    t.is(l.at(3), 1)
+test('#atOr returns the element or default', t => {
+    const xs = List(1, 'string');
+    const def = 'default'
+    t.is(xs.atOr(1, def), 'string');
+    t.is(xs.atOr(10, def), def);
 });
 

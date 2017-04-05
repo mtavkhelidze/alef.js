@@ -25,7 +25,7 @@
  * SOFTWARE.
  */
 
-import { List } from  './List'
+import { List } from './List';
 
 const _exp = {
     List: (...args) => new List(...args)

@@ -56,7 +56,7 @@ test('applies a function to all elements', (t) => {
     t.is(t.context.fn.callCount, t.context.xs.length);
 });
 
-test.failing('supplies positive index as a second argument to fn', (t) => {
+test.skip('supplies positive index as a second argument to fn', (t) => {
     map(t.context.fn, t.context.xs);
 
     for (let i = 0; i < t.context.fn.callCount; i++) {

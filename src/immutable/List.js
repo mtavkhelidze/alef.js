@@ -125,7 +125,22 @@ class List {
         if (this.__head) {
             return this.__head.value;
         }
-        throw new Error('The list is empty.');
+        throw new RangeError('The list is empty.');
+    }
+
+    /**
+     * Returns value at `ix` position in the list, or supplied default.
+     *
+     * @param {Number} ix index
+     * @param {*} xd default value
+     * @returns {*}
+     */
+    atOr(ix, xd) {
+        try {
+            return this.at(ix);
+        } catch (e) {
+            return xd;
+        }
     }
 
     /**
@@ -135,8 +150,8 @@ class List {
      * @returns {*}
      */
     at(ix) {
-        if(ix < 0 && ix >= this.length) {
-            throw new Error('Index out of bounds.')
+        if (ix < 0 && ix >= this.length) {
+            throw IndexOutOfBounds;
         }
         let tmp = this.__head;
         for (let i = ix; i > 0; i -= 1) {
