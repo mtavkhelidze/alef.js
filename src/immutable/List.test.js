@@ -124,3 +124,18 @@ test('#last returns last element of the list', t => {
     const xs = List(1, 2, 'last');
     t.is(xs.last(), 'last');
 });
+
+test('#tail throws exception if the list is empty', t => {
+    const xs = List();
+    t.throws(() => {
+        xs.tail();
+    }, RangeError);
+});
+
+test('#tail returns a new list minus first element', t => {
+    const xs = List('one', 'two', 3);
+    t.is(xs.tail().length, xs.length - 1);
+    t.is(xs.tail().at(0), 'two');
+    t.is(xs.tail().tail().length, xs.length - 2);
+    t.is(xs.tail().tail().at(0), 3);
+});

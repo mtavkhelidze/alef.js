@@ -146,6 +146,21 @@ class List {
     }
 
     /**
+     * Selects all elements except the first.
+     *
+     * @returns {*}
+     */
+    tail() {
+        if (this.__head) {
+            const nxs = new List();
+            nxs.__head = this.__head.next;
+            nxs.length = this.length - 1;
+            return nxs;
+        }
+        throw new RangeError('The list is empty.');
+    }
+
+    /**
      * Inspect the first element of the List.
      *
      * @returns {*} value of the first element or undefined if
