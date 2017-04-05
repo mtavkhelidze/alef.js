@@ -91,6 +91,6 @@ test('#push adds an element to the top', t => {
 });
 
 test('#concat returns a concatenated list', t => {
-    const l1 = List(1,2,3);
+    const l1 = List(1, 2, 3);
 });
 

@@ -103,7 +103,7 @@ class _List {
      */
     head() {
         if (this.__head) {
-            return this.__head.value
+            return this.__head.value;
         }
         throw new Error('The _List is empty');
     }
@@ -157,4 +157,3 @@ const List = (...args) => new _List(...args);
 export {
     List
 };
-
