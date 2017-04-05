@@ -31,9 +31,11 @@ import { List } from './List';
 // eslint-disable-next-line no-unused-vars
 const log = console.log.bind(console);
 
-test('#head of empty returns undefined', t => {
+test('#head of empty throws an Error', t => {
     const xs = new List();
-    t.is(undefined, xs.head());
+    t.throws(() => {
+        xs.head();
+    }, Error);
 });
 
 test('#head returns first number', t => {
@@ -51,6 +53,7 @@ test('is iterable in correct order', t => {
     const result = [];
     const xs = new List(1, '0xdeadbeef');
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const x of xs) {
         result.push(x);
     }
@@ -81,8 +84,8 @@ test('#push adds an element to the top', t => {
     const xs = new List(1, 2, 3, 4);
     const nxs = xs.push(6);
     t.is(xs.head(), 1);
-    t.is(xs.length, 4)
+    t.is(xs.length, 4);
     t.is(nxs.head(), 6);
-    t.is(nxs.length, 5)
+    t.is(nxs.length, 5);
 });
 

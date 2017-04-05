@@ -38,17 +38,14 @@ class Node {
         this.next = next || null;
     }
 }
-
 /**
- * Immutable singly-linked list.
+ * Scala style immutable list.
  */
 class List {
     /**
      * Creates instance of List
      *
-     * @constructor
-     * @this {List}
-     * @param {any|array} xs arguments or an Array
+     * @param {...*} [xs] arguments or an Array
      */
     constructor(...xs) {
         /**
@@ -99,18 +96,22 @@ class List {
     /**
      * Inspect the first element of the list.
      *
-     * @returns {any|undefined} value of the first element or undefined if
+     * @returns {*} value of the first element or undefined if
      * the list is empty
+     * @throws {Error} if the list is empty
      */
     head() {
-        return this.__head ? this.__head.value : undefined;
+        if (this.__head) {
+            return this.__head.value
+        }
+        throw new Error('The list is empty');
     }
 
     /**
      * Return element at position `ix`.
      *
      * @param ix positive integer
-     * @returns {any}
+     * @returns {*}
      */
     at(ix) {
         assert(ix >= 0);
