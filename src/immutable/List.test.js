@@ -91,7 +91,7 @@ test('#push adds an element to the top', t => {
 
 test('#atOr returns the element or default', t => {
     const xs = List(1, 'string');
-    const def = 'default'
+    const def = 'default';
     t.is(xs.atOr(1, def), 'string');
     t.is(xs.atOr(10, def), def);
 });
