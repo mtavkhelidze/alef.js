@@ -90,7 +90,11 @@ test('#push adds an element to the top', t => {
     t.is(nxs.length, 5);
 });
 
-test('#concat returns a concatenated list', t => {
+test.skip('#concat returns a concatenated list', t => {
     const l1 = List(1, 2, 3);
+    const l2 = List(-2, -1, 0);
+    const l = l2.concat(l1);
+    t.is(l.head(), l2.head());
+    t.is(l.at(3), 1)
 });
 

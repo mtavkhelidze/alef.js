@@ -81,6 +81,19 @@ class _List {
     }
 
     /**
+     * Returns a new list containing the elements from the this list
+     * followed by the elements of the `xs`.
+     *
+     * @param {List} xs A list to concatenate with
+     * @returns {List}
+     */
+    // concat(xs) {
+    //     const nxs = List();
+    //     nxs.__head = this.__head;
+    //     return nxs;
+    // }
+
+    /**
      * Returns new _List with `x` added to the top.
      *
      * @param x
@@ -105,7 +118,7 @@ class _List {
         if (this.__head) {
             return this.__head.value;
         }
-        throw new Error('The _List is empty');
+        throw new Error('The list is empty.');
     }
 
     /**
@@ -115,7 +128,9 @@ class _List {
      * @returns {*}
      */
     at(ix) {
-        assert(ix >= 0);
+        if(ix < 0 && ix >= this.length) {
+            throw new Error('Index out of bounds.')
+        }
         let tmp = this.__head;
         for (let i = ix; i > 0; i -= 1) {
             tmp = tmp.next;
