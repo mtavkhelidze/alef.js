@@ -30,21 +30,21 @@ import A from './index';
 
 const List = A.List;
 
-test('#head of empty throws an Error', t => {
+test('#first of empty throws an Error', t => {
     const xs = List();
     t.throws(() => {
-        xs.head();
+        xs.first();
     }, RangeError);
 });
 
-test('#head returns first number', t => {
+test('#first returns first number', t => {
     const xs = List(1);
-    t.is(1, xs.head());
+    t.is(1, xs.first());
 });
 
-test('#head returns first string', t => {
+test('#first returns first string', t => {
     const xs = List('0xdeadbeef');
-    t.is('0xdeadbeef', xs.head());
+    t.is('0xdeadbeef', xs.first());
 });
 
 test('is iterable in correct order', t => {
@@ -64,7 +64,7 @@ test('is iterable in correct order', t => {
 
 test('can be initialized from Array', t => {
     const xs = List([1, 2, 3]);
-    t.is(xs.head(), 1);
+    t.is(xs.first(), 1);
     t.is(xs.length, 3);
 });
 
@@ -90,9 +90,9 @@ test('#at throws RangeError on invalid index', t => {
 test('#push adds an element to the top', t => {
     const xs = List(1, 2, 3, 4);
     const nxs = xs.push(6);
-    t.is(xs.head(), 1);
+    t.is(xs.first(), 1);
     t.is(xs.length, 4);
-    t.is(nxs.head(), 6);
+    t.is(nxs.first(), 6);
     t.is(nxs.length, 5);
 });
 
