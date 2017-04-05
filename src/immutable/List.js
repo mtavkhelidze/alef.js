@@ -56,12 +56,12 @@ class List {
         this.length = 0;
 
         /**
-         * List first
+         * List head
          *
          * @type {Node}
          * @private
          */
-        this.__first = null;
+        this.__head = null;
 
         /**
          * List tail
@@ -96,7 +96,7 @@ class List {
      */
     // concat(xs) {
     //     const nxs = List();
-    //     nxs.__first = this.__first;
+    //     nxs.__head = this.__head;
     //     return nxs;
     // }
 
@@ -121,7 +121,7 @@ class List {
      */
     toArray() {
         const ar = new Array(this.length);
-        let tmp = this.__first;
+        let tmp = this.__head;
         let i = 0;
         while (tmp) {
             ar[i] = tmp.value;
@@ -139,8 +139,8 @@ class List {
      */
     push(x) {
         const nl = new List();
-        nl.__first = new Node(x);
-        nl.__first.next = this.__first;
+        nl.__head = new Node(x);
+        nl.__head.next = this.__head;
         nl.length = this.length + 1;
         return nl;
     }
@@ -152,9 +152,9 @@ class List {
      * the List is empty
      * @throws {RangeError} if the list is empty
      */
-    first() {
-        if (this.__first) {
-            return this.__first.value;
+    head() {
+        if (this.__head) {
+            return this.__head.value;
         }
         throw new RangeError('The list is empty.');
     }
@@ -184,7 +184,7 @@ class List {
         if (ix < 0 || ix >= this.length) {
             throw new RangeError('Index out of bounds.');
         }
-        let tmp = this.__first;
+        let tmp = this.__head;
         for (let i = ix; i > 0; i -= 1) {
             tmp = tmp.next;
         }
@@ -201,9 +201,9 @@ class List {
         const len = xs.length;
         for (let i = len - 1; i >= 0; i -= 1) {
             const nx = new Node(xs[i]);
-            nx.next = this.__first;
+            nx.next = this.__head;
 
-            this.__first = nx;
+            this.__head = nx;
             if (this.__last === null) {
                 this.__last = nx;
             }
@@ -217,7 +217,7 @@ class List {
      * @private
      */
     * __iter() {
-        let tmp = this.__first;
+        let tmp = this.__head;
         while (tmp !== null) {
             yield tmp.value;
             tmp = tmp.next;
