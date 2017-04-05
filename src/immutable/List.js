@@ -52,6 +52,7 @@ class List {
          * Length of the List
          *
          * @type {number}
+         * @public
          */
         this.length = 0;
 
@@ -109,9 +110,8 @@ class List {
     last() {
         if (this.__last) {
             return this.__last.value;
-        } else {
-            throw new RangeError('The list is empty.');
         }
+        throw new RangeError('The list is empty.');
     }
 
     /**
