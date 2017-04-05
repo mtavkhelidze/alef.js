@@ -103,3 +103,24 @@ test('#atOr returns the element or default', t => {
     t.is(xs.atOr(10, def), def);
 });
 
+test('#toArray creates new Array with list elements', t => {
+    const xs = List(1, 3, 4, 'string');
+    const ar = xs.toArray();
+    t.true(ar instanceof Array);
+    t.is(ar.length, xs.length);
+    for (let i = 0; i < ar.length; i += 1) {
+        t.is(ar[i], xs.at(i));
+    }
+});
+
+test('#last throws exception if the list is empty', t => {
+    const xs = List();
+    t.throws(() => {
+        xs.last();
+    }, RangeError);
+});
+
+test('#last returns last element of the list', t => {
+    const xs = List(1, 2, 'last');
+    t.is(xs.last(), 'last');
+});

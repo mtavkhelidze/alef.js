@@ -69,7 +69,7 @@ class List {
          * @type {Node}
          * @private
          */
-        this.__tail = null;
+        this.__last = null;
 
         /**
          * List iterator function
@@ -101,6 +101,37 @@ class List {
     // }
 
     /**
+     * Selects last element.
+     *
+     * @returns {*}
+     * @throws {RangeError} if the list is empty.
+     */
+    last() {
+        if (this.__last) {
+            return this.__last.value;
+        } else {
+            throw new RangeError('The list is empty.');
+        }
+    }
+
+    /**
+     * Copies elements of the list into new Array
+     *
+     * @return {Array} array of values
+     */
+    toArray() {
+        const ar = new Array(this.length);
+        let tmp = this.__head;
+        let i = 0;
+        while (tmp) {
+            ar[i] = tmp.value;
+            tmp = tmp.next;
+            i += 1;
+        }
+        return ar;
+    }
+
+    /**
      * Returns new List with `x` added to the top.
      *
      * @param x
@@ -119,7 +150,7 @@ class List {
      *
      * @returns {*} value of the first element or undefined if
      * the List is empty
-     * @throws {Error} if the List is empty
+     * @throws {RangeError} if the list is empty
      */
     head() {
         if (this.__head) {
@@ -171,7 +202,12 @@ class List {
         for (let i = len - 1; i >= 0; i -= 1) {
             const nx = new Node(xs[i]);
             nx.next = this.__head;
+
             this.__head = nx;
+            if (this.__last === null) {
+                this.__last = nx;
+            }
+
             this.length += 1;
         }
     }
