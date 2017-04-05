@@ -26,10 +26,9 @@
  */
 
 import test from 'ava';
-import { List } from './List';
+import A from './index';
 
-// eslint-disable-next-line no-unused-vars
-const log = console.log.bind(console);
+const List = A.List;
 
 test('#head of empty throws an Error', t => {
     const xs = List();

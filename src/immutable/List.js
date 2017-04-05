@@ -27,37 +27,36 @@
 
 /* eslint-disable no-underscore-dangle */
 
-import assert from 'assert';
-
 /**
  * Internal class.
  */
 class Node {
-    constructor(value, next = null) {
+    constructor(value, next, prev) {
         this.value = value;
         this.next = next || null;
+        this.prev = prev || null;
     }
 }
 
 /**
- * Scala style immutable _List.
+ * Scala style immutable List.
  */
-class _List {
+class List {
     /**
-     * Creates instance of _List
+     * Creates instance of List
      *
      * @param {...*} [xs] arguments or an Array
      */
     constructor(...xs) {
         /**
-         * Length of the _List
+         * Length of the List
          *
          * @type {number}
          */
         this.length = 0;
 
         /**
-         * _List head
+         * List head
          *
          * @type {Node}
          * @private
@@ -65,7 +64,15 @@ class _List {
         this.__head = null;
 
         /**
-         * _List iterator function
+         * List tail
+         *
+         * @type {Node}
+         * @private
+         */
+        this.__tail = null;
+
+        /**
+         * List iterator function
          *
          * @type {function}
          */
@@ -94,13 +101,13 @@ class _List {
     // }
 
     /**
-     * Returns new _List with `x` added to the top.
+     * Returns new List with `x` added to the top.
      *
      * @param x
-     * @returns {_List}
+     * @returns {List}
      */
     push(x) {
-        const nl = new _List();
+        const nl = new List();
         nl.__head = new Node(x);
         nl.__head.next = this.__head;
         nl.length = this.length + 1;
@@ -108,11 +115,11 @@ class _List {
     }
 
     /**
-     * Inspect the first element of the _List.
+     * Inspect the first element of the List.
      *
      * @returns {*} value of the first element or undefined if
-     * the _List is empty
-     * @throws {Error} if the _List is empty
+     * the List is empty
+     * @throws {Error} if the List is empty
      */
     head() {
         if (this.__head) {
@@ -139,7 +146,7 @@ class _List {
     }
 
     /**
-     * Populates _List with elements of `xs`
+     * Populates List with elements of `xs`
      *
      * @param {array} xs
      * @private
@@ -166,8 +173,6 @@ class _List {
         }
     }
 }
-
-const List = (...args) => new _List(...args);
 
 export {
     List

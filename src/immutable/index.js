@@ -25,8 +25,10 @@
  * SOFTWARE.
  */
 
-import { List } from './List';
+import { List } from  './List'
 
-export {
-    List
+const _exp = {
+    List: (...args) => new List(...args)
 };
+
+export default _exp;
