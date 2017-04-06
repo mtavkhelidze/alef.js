@@ -13,7 +13,7 @@
 
 __alef.js__ is a javascript library which provides immutable data structures.
 
-Interfaces are loosy modeled after (Scala)[http://www.scala-lang.org].
+Interfaces are loosy modeled after [Scala](http://www.scala-lang.org).
 
 This __**alpha**__ release and currently has only on type `List`.
 
