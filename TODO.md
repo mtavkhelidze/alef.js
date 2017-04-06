@@ -1,4 +1,13 @@
-## Testing
+# TODO
 
-- Add test for references to Node withing Lists
+## Tests
 
+|||
+|---|---|
+| List | Separate test for `next` and `prev` pointers|
+
+
+## Add
+ 
+- Map
+- Heap
