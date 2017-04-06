@@ -27,7 +27,7 @@
 
 import 'babel-polyfill';
 
-import { List } from './src/immutable';
+import { List } from './immutable';
 
 export default {
     List
