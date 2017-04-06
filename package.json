@@ -1,15 +1,20 @@
 {
   "name": "alef.js",
-  "version": "1.0.7",
-  "description": "ES6 Functional Library",
+  "version": "1.0.0",
+  "description": "ES6 Immutable Data Structures Library",
   "main": "./dist/index.js",
   "scripts": {
     "test": "ava",
     "test:watch": "ava --verbose --fail-fast --watch",
     "build": "babel src --presets babel-preset-env --out-dir dist",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "clean": "rm -fr dist"
   },
-  "author": "Misha Tavkhelidze <misha.tavkhelidze@gmail.com>",
+  "author": {
+    "name": "Misha Tavkhelidze",
+    "email": "misha.tavkhelidze@gmail.com",
+    "url": "https://mtavkhelidze.github.io"
+  },
   "license": "ISC",
   "repository": {
     "url": "https://github.com/mtavkhelidze/alef.js.git",
