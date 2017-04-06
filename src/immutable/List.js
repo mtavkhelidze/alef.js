@@ -62,7 +62,7 @@ class List {
          * @type {Node}
          * @private
          */
-        this.__start = null;
+        this.__begin = null;
 
         /**
          * List tail
@@ -96,7 +96,7 @@ class List {
      */
 
     contains(val) {
-        let tmp = this.__start;
+        let tmp = this.__begin;
         while (tmp) {
             if (tmp.value === val) {
                 return true;
@@ -126,7 +126,7 @@ class List {
      */
     toArray() {
         const ar = new Array(this.length);
-        let tmp = this.__start;
+        let tmp = this.__begin;
         let i = 0;
         while (tmp) {
             ar[i] = tmp.value;
@@ -144,8 +144,8 @@ class List {
      */
     push(x) {
         const nl = new List();
-        nl.__start = new Node(x, this.__start);
-        nl.__start.next.prev = nl.__start;
+        nl.__begin = new Node(x, this.__begin);
+        nl.__begin.next.prev = nl.__begin;
         nl.length = this.length + 1;
         return nl;
     }
@@ -156,9 +156,9 @@ class List {
      * @returns {*}
      */
     tail() {
-        if (this.__start) {
+        if (this.__begin) {
             const nxs = new List();
-            nxs.__start = this.__start.next;
+            nxs.__begin = this.__begin.next;
             nxs.length = this.length - 1;
             return nxs;
         }
@@ -173,8 +173,8 @@ class List {
      * @throws {RangeError} if the list is empty
      */
     head() {
-        if (this.__start) {
-            return this.__start.value;
+        if (this.__begin) {
+            return this.__begin.value;
         }
         throw new RangeError('The list is empty.');
     }
@@ -209,7 +209,7 @@ class List {
         const len = this.length;
 
         if (ix < len / 2) {
-            tmp = this.__start;
+            tmp = this.__begin;
             for (let i = 0; i < ix; i += 1) {
                 tmp = tmp.next;
             }
@@ -233,13 +233,13 @@ class List {
         const len = xs.length;
         for (let i = len - 1; i >= 0; i -= 1) {
             const nx = new Node(xs[i]);
-            nx.next = this.__start;
+            nx.next = this.__begin;
 
-            if (this.__start) {
-                this.__start.prev = nx;
+            if (this.__begin) {
+                this.__begin.prev = nx;
             }
 
-            this.__start = nx;
+            this.__begin = nx;
             if (this.__end === null) {
                 this.__end = nx;
             }
@@ -253,7 +253,7 @@ class List {
      * @private
      */
     * __iter() {
-        let tmp = this.__start;
+        let tmp = this.__begin;
         while (tmp !== null) {
             yield tmp.value;
             tmp = tmp.next;

@@ -142,14 +142,16 @@ test('#tail returns a new list minus first element', t => {
 
 const testLinkage = (t, xs, a, b) => {
     let i = a;
-    let tmp = xs.__start;
+    // eslint-disable-next-line no-underscore-dangle
+    let tmp = xs.__begin;
     while (tmp) {
         t.is(i, tmp.value);
         tmp = tmp.next;
         i += 1;
     }
     i = b;
-    tmp = xs.__tail;
+    // eslint-disable-next-line no-underscore-dangle
+    tmp = xs.__end;
     while (tmp) {
         t.is(i, tmp.value);
         tmp = tmp.prev;
