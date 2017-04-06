@@ -139,8 +139,8 @@ class List {
      */
     push(x) {
         const nl = new List();
-        nl.__head = new Node(x);
-        nl.__head.next = this.__head;
+        nl.__head = new Node(x, this.__head);
+        nl.__head.next.prev = nl.__head;
         nl.length = this.length + 1;
         return nl;
     }
@@ -217,6 +217,10 @@ class List {
         for (let i = len - 1; i >= 0; i -= 1) {
             const nx = new Node(xs[i]);
             nx.next = this.__head;
+
+            if(this.__head) {
+                this.__head.prev = nx;
+            }
 
             this.__head = nx;
             if (this.__last === null) {
