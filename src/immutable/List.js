@@ -62,7 +62,7 @@ class List {
          * @type {Node}
          * @private
          */
-        this.__head = null;
+        this.__start = null;
 
         /**
          * List tail
@@ -70,7 +70,7 @@ class List {
          * @type {Node}
          * @private
          */
-        this.__last = null;
+        this.__end = null;
 
         /**
          * List iterator function
@@ -96,9 +96,9 @@ class List {
      */
 
     contains(val) {
-        let tmp = this.__head;
-        while(tmp) {
-            if(tmp.value === val) {
+        let tmp = this.__start;
+        while (tmp) {
+            if (tmp.value === val) {
                 return true;
             }
             tmp = tmp.next;
@@ -113,8 +113,8 @@ class List {
      * @throws {RangeError} if the list is empty.
      */
     last() {
-        if (this.__last) {
-            return this.__last.value;
+        if (this.__end) {
+            return this.__end.value;
         }
         throw new RangeError('The list is empty.');
     }
@@ -126,7 +126,7 @@ class List {
      */
     toArray() {
         const ar = new Array(this.length);
-        let tmp = this.__head;
+        let tmp = this.__start;
         let i = 0;
         while (tmp) {
             ar[i] = tmp.value;
@@ -144,8 +144,8 @@ class List {
      */
     push(x) {
         const nl = new List();
-        nl.__head = new Node(x, this.__head);
-        nl.__head.next.prev = nl.__head;
+        nl.__start = new Node(x, this.__start);
+        nl.__start.next.prev = nl.__start;
         nl.length = this.length + 1;
         return nl;
     }
@@ -156,9 +156,9 @@ class List {
      * @returns {*}
      */
     tail() {
-        if (this.__head) {
+        if (this.__start) {
             const nxs = new List();
-            nxs.__head = this.__head.next;
+            nxs.__start = this.__start.next;
             nxs.length = this.length - 1;
             return nxs;
         }
@@ -173,8 +173,8 @@ class List {
      * @throws {RangeError} if the list is empty
      */
     head() {
-        if (this.__head) {
-            return this.__head.value;
+        if (this.__start) {
+            return this.__start.value;
         }
         throw new RangeError('The list is empty.');
     }
@@ -204,10 +204,22 @@ class List {
         if (ix < 0 || ix >= this.length) {
             throw new RangeError('Index out of bounds.');
         }
-        let tmp = this.__head;
-        for (let i = ix; i > 0; i -= 1) {
-            tmp = tmp.next;
+
+        let tmp = null;
+        const len = this.length;
+
+        if (ix < len / 2) {
+            tmp = this.__start;
+            for (let i = 0; i < ix; i += 1) {
+                tmp = tmp.next;
+            }
+        } else {
+            tmp = this.__end;
+            for (let i = len - 1; i > ix; i -= 1) {
+                tmp = tmp.prev;
+            }
         }
+
         return tmp.value;
     }
 
@@ -221,15 +233,15 @@ class List {
         const len = xs.length;
         for (let i = len - 1; i >= 0; i -= 1) {
             const nx = new Node(xs[i]);
-            nx.next = this.__head;
+            nx.next = this.__start;
 
-            if(this.__head) {
-                this.__head.prev = nx;
+            if (this.__start) {
+                this.__start.prev = nx;
             }
 
-            this.__head = nx;
-            if (this.__last === null) {
-                this.__last = nx;
+            this.__start = nx;
+            if (this.__end === null) {
+                this.__end = nx;
             }
 
             this.length += 1;
@@ -241,7 +253,7 @@ class List {
      * @private
      */
     * __iter() {
-        let tmp = this.__head;
+        let tmp = this.__start;
         while (tmp !== null) {
             yield tmp.value;
             tmp = tmp.next;
@@ -249,6 +261,4 @@ class List {
     }
 }
 
-export {
-    List
-};
+export default List;

@@ -26,9 +26,7 @@
  */
 
 import test from 'ava';
-import A from './index';
-
-const List = A.List;
+import { List } from '../../src/immutable';
 
 test('#head of empty throws an Error', t => {
     const xs = List();
@@ -144,7 +142,7 @@ test('#tail returns a new list minus first element', t => {
 
 const testLinkage = (t, xs, a, b) => {
     let i = a;
-    let tmp = xs.__head;
+    let tmp = xs.__start;
     while (tmp) {
         t.is(i, tmp.value);
         tmp = tmp.next;

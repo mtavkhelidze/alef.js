@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "ava",
-    "test:watch": "ava -v --watch"
+    "test:watch": "ava --verbose --fail-fast --watch"
   },
   "author": "Misha Tavkhelidze <misha.tavkhelidze@gmail.com>",
   "license": "ISC",
@@ -19,13 +19,11 @@
   "devDependencies": {
     "ava": "^0.18.2",
     "babel-cli": "^6.24.0",
-    "babel-preset-latest": "^6.24.0",
-    "immutable": "^3.8.1",
-    "sinon": "^2.0.0"
+    "babel-preset-env": "^1.3.2"
   },
   "babel": {
     "presets": [
-      "latest"
+      "env"
     ]
   },
   "ava": {
