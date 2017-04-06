@@ -1,6 +1,6 @@
 {
   "name": "alef.js",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "ES6 Immutable Data Structures Library",
   "main": "./dist/index.js",
   "scripts": {
@@ -20,9 +20,11 @@
     "url": "https://github.com/mtavkhelidze/alef.js.git",
     "type": "git"
   },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0"
+  },
   "devDependencies": {
     "ava": "^0.18.2",
-    "babel-polyfill": "^6.23.0",
     "babel-cli": "^6.24.0",
     "babel-preset-env": "^1.3.2"
   },
