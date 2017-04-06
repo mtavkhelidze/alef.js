@@ -1,8 +1,38 @@
 # alef.js
 
-## ES6 Immutable Data Structures Library
+## Immutable Data Structures JavaScript Library
 
----
+### Table of Contents
+
+* [Description](#Descripton)
+* [Install](#Install)
+* [Test](#Test)
+* [Name](#Name)
+
+### Description
+
+__alef.js__ is a javascript library which provides immutable data structures.
+
+Interfaces are loosy modeled after (Scala)[http://www.scala-lang.org].
+
+This __**alpha**__ release and currently has only on type `List`.
+
+### Install
+
+```bash
+$ npm install --save alef.js
+```
+
+### Test
+
+```bash
+$ git clone https://github.com/mtavkhelidze/alef.js.git
+$ cd alef.js
+$ npm install
+$ npm test
+```
+
+### Name
 
 **_Aleph-null_** (or
 _Aleph-naught_ or _aleph-zero_) is the
