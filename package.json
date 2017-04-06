@@ -1,5 +1,5 @@
 {
-  "name": "alef",
+  "name": "alef.js",
   "version": "1.0.0",
   "description": "ES6 Functional Library",
   "main": "index.js",
@@ -14,12 +14,12 @@
     "type": "git"
   },
   "dependencies": {
-    "babel-polyfill": "^6.23.0"
-  },
-  "devDependencies": {
-    "ava": "^0.18.2",
+    "babel-polyfill": "^6.23.0",
     "babel-cli": "^6.24.0",
     "babel-preset-env": "^1.3.2"
+  },
+  "devDependencies": {
+    "ava": "^0.18.2"
   },
   "babel": {
     "presets": [
