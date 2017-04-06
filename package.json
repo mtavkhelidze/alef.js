@@ -10,7 +10,7 @@
   "author": "Misha Tavkhelidze <misha.tavkhelidze@gmail.com>",
   "license": "ISC",
   "repository": {
-    "url": "https://mtavkhelidze@bitbucket.org/mtavkhelidze/alef.git",
+    "url": "https://github.com/mtavkhelidze/alef.js.git",
     "type": "git"
   },
   "dependencies": {
