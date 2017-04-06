@@ -1,6 +1,6 @@
 {
   "name": "alef.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "ES6 Functional Library",
   "main": "./dist/index.js",
   "scripts": {
