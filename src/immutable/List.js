@@ -89,17 +89,22 @@ class List {
     }
 
     /**
-     * Returns a new list containing the elements from the this list
-     * followed by the elements of the `xs`.
+     * Tests whether this sequence contains a given value as an element.
      *
-     * @param {List} xs A list to concatenate with
-     * @returns {List}
+     * @param {*} value to look for
+     * @returns {boolean}
      */
-    // concat(xs) {
-    //     const nxs = List();
-    //     nxs.__head = this.__head;
-    //     return nxs;
-    // }
+
+    contains(val) {
+        let tmp = this.__head;
+        while(tmp) {
+            if(tmp.value === val) {
+                return true;
+            }
+            tmp = tmp.next;
+        }
+        return false;
+    }
 
     /**
      * Selects last element.

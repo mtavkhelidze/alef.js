@@ -140,6 +140,8 @@ test('#tail returns a new list minus first element', t => {
     t.is(xs.tail().tail().at(0), 3);
 });
 
+// fixme: #testLinkage probalby can be imporeved.
+
 const testLinkage = (t, xs, a, b) => {
     let i = a;
     let tmp = xs.__head;
@@ -169,4 +171,16 @@ test('result of #tail is doubly linked list', t => {
     testLinkage(t, xs1, 0, 4);
     t.is(xs2.head(), 1);
     testLinkage(t, xs2, 1, 4);
+});
+
+test('#contains reports true correctly', t => {
+    const xs = List('one', undefined, null);
+    t.true(xs.contains(null));
+    t.true(xs.contains(undefined));
+    t.true(xs.contains('one'));
+});
+
+test('#contains reports false correctly', t => {
+    const xs = List('one', undefined, null);
+    t.false(xs.contains('two'));
 });
