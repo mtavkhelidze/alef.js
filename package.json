@@ -1,7 +1,7 @@
 {
   "name": "alef.js",
-  "version": "1.0.15",
-  "description": "ES6 Immutable Data Structures Library",
+  "version": "1.0.16",
+  "description": "Immutable Data Structures JavaScript Library",
   "main": "./dist/index.js",
   "scripts": {
     "test": "ava",
