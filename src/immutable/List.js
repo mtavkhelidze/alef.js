@@ -89,9 +89,18 @@ class List {
     }
 
     /**
+     * Returns true if List has no elements, false otherwise
+     *
+     * @returns {boolean}
+     */
+    empty() {
+        return this.__begin === null;
+    }
+
+    /**
      * Tests whether this sequence contains a given value as an element.
      *
-     * @param {*} value to look for
+     * @param {*} val to look for
      * @returns {boolean}
      */
 

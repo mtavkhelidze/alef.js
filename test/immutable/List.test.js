@@ -184,3 +184,8 @@ test('#contains reports false correctly', t => {
     const xs = List('one', undefined, null);
     t.false(xs.contains('two'));
 });
+
+test('#empty returns true when empty', t => {
+    const xs = List();
+    t.true(xs.empty());
+});
