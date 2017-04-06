@@ -1,4 +1,6 @@
-### alef.js
+# alef.js
+
+## ES6 Immutable Data Structures Library
 
 ---
 
