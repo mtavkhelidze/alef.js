@@ -4,10 +4,10 @@
 
 ### Table of Contents
 
-* [Description](#Descripton)
-* [Install](#Install)
-* [Test](#Test)
-* [Name](#Name)
+* [Description](#descripton)
+* [Install](#install)
+* [Test](#test)
+* [Name](#name)
 
 ### Description
 
