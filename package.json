@@ -3,6 +3,14 @@
   "version": "1.0.16",
   "description": "Immutable Data Structures JavaScript Library",
   "main": "./dist/index.js",
+  "keywords": [
+    "immutable",
+    "data-structures",
+    "List",
+    "functional-programming",
+    "immutable-collections",
+    "immutable-data-structures"
+  ],
   "scripts": {
     "test": "ava",
     "test:watch": "ava --verbose --fail-fast --watch",
