@@ -109,6 +109,25 @@ class List {
     }
 
     /**
+     * Selects first n elements.
+     *
+     * @param {Number} n the number of elements to take from this list.
+     * @returns {List} a list consisting only of the first n elements of
+     * this list, or else the whole list, if it has less than n elements.
+     */
+    take(n) {
+        const xs = new List();
+        xs.__begin = this.__begin;
+        xs.length = n > this.__length ? this.__length : n;
+        xs.__end = this.__begin;
+        for (let i = 1; i < xs.length; i += 1) {
+            xs.__end = xs.__end.next;
+        }
+        xs.__end.next = null;
+        return xs;
+    }
+
+    /**
      * Returns true if List has no elements, false otherwise
      *
      * @returns {boolean}

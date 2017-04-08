@@ -189,3 +189,18 @@ test('#empty returns true when empty', t => {
     const xs = List();
     t.true(xs.empty());
 });
+
+test('#take return a list with first n elements', t => {
+    const xs = List(1, 2, 3, 4, 5);
+    const nxs = xs.take(3);
+    t.is(nxs.length, 3);
+    let i = 0;
+    for (const x of nxs) {
+        t.is(x, xs.at(i));
+        i += 1;
+    }
+    t.is(i, 3);
+    t.throws(() => {
+        nxs.at(3)
+    }, RangeError);
+});

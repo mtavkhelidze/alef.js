@@ -10,6 +10,8 @@
     </LanguageOptions>
     <LanguageOptions name="__TEMPLATE__">
       <option name="addBlankAfter" value="false" />
+      <option name="separateBefore" value="true" />
+      <option name="lenBefore" value="2" />
     </LanguageOptions>
   </settings>
 </component>
