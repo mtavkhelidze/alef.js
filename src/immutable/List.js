@@ -40,6 +40,25 @@ class Node {
 
 /**
  * Scala style immutable List.
+ * @constructor
+ * @example
+ *
+ * const List = require('alef.js').List;
+ * // or
+ * //
+ * // import { List } from 'alef.js';
+ * //
+ * // or
+ * //
+ * // import X from 'alef.js';
+ * // const List = X.List;
+ *
+ * const l = List(1,2,3);
+ * l.head(); // 1
+ * l.tail(); // List(2,3)
+ * l.at(2); // 3
+ * l.atOr(4, 'default'); // 'default'
+ *
  */
 class List {
     /**
@@ -76,6 +95,7 @@ class List {
          * List iterator function
          *
          * @type {function}
+         * @private
          */
         this[Symbol.iterator] = this.__iter;
 
@@ -191,7 +211,7 @@ class List {
     /**
      * Returns value at `ix` position in the list, or supplied default.
      *
-     * @param {Number} ix index
+     * @param {Number} ix positive integer
      * @param {*} xd default value
      * @returns {*}
      */
@@ -206,7 +226,7 @@ class List {
     /**
      * Return element at position `ix`.
      *
-     * @param ix positive integer
+     * @param {Number} ix positive integer
      * @returns {*}
      */
     at(ix) {

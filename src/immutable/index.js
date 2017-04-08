@@ -27,6 +27,9 @@
 
 import _List from './List';
 
+/**
+ * @private
+ */
 const List = (...args) => new _List(...args);
 
 export {
