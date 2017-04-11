@@ -25,6 +25,9 @@
  * SOFTWARE.
  */
 
+/**
+ * @private
+ */
 class Queue {
     enqueue() {}
     dequeue() {}

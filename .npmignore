@@ -5,5 +5,5 @@ TODO.md
 /src/
 .npmignore
 .gitignore
-.esdoc.json
+.jsdoc2md.json
 

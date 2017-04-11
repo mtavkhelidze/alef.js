@@ -25,6 +25,9 @@
  * SOFTWARE.
  */
 
+/**
+ * @private
+ */
 class Stack {
     push(x) {}
     pop(x) {}

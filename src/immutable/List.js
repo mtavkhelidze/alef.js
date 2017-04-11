@@ -29,6 +29,7 @@
 
 /**
  * Internal class.
+ * @private
  */
 
 const Node = (value, next = null) => {
@@ -112,6 +113,10 @@ class List {
         }
     }
 
+    /**
+     * Dumps a List
+     * @private
+     */
     __dump() {
         console.log(`BEGIN: ${this.__begin.id}`);
         for (let tmp = this.__begin; tmp && tmp.next; tmp = tmp.next) {

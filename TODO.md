@@ -1,18 +1,17 @@
 # TODO
 
-## Now
+## Diverse
 
-- Make export use static apply method instead of anon. func.
+- Make export use static apply method instead of anon. func (maybe).
 
 ## Tests
 
-|||
-|---|---|
-| List | Separate test for `next` and `prev` pointers|
-
+- Make tests for _built_ sources.
 
 ## Add
  
 - Map
 - Stack
 - Heap
+- Queue
+
