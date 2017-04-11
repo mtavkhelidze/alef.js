@@ -1,3 +1,11 @@
+# alef.js
+
+Immutable Data Structures JavaScript Library
+
+---
+
+# API Documentation
+
 <a name="List"></a>
 
 ## List
@@ -16,7 +24,7 @@ Scala style immutable List.
     * [.tail()](#List+tail) ⇒ <code>\*</code>
     * [.take(n)](#List+take) ⇒ <code>[List](#List)</code>
     * [.empty()](#List+empty) ⇒ <code>boolean</code>
-    * [.contains(val)](#List+contains) ⇒ <code>boolean</code>
+    * [.contains(value)](#List+contains) ⇒ <code>boolean</code>
 
 <a name="new_List_new"></a>
 
@@ -41,7 +49,6 @@ const List = require('alef.js').List;
 // const List = X.List;
 
 const l = List(1,2,3);
-
 l.head(); // 1
 l.tail(); // List(2,3)
 l.at(2); // 3
@@ -134,10 +141,14 @@ Returns true if List has no elements, false otherwise
 
 <a name="List+contains"></a>
 
-### list.contains(val) ⇒ <code>boolean</code>
+### list.contains(value) ⇒ <code>boolean</code>
 Tests whether this sequence contains a given value as an element.
 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| val | <code>\*</code> | to look for |
+| value | <code>\*</code> | to look for |
+
+
+---
+Automatically generated from comments in `src`.
