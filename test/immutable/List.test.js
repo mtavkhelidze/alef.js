@@ -28,6 +28,26 @@
 import test from 'ava';
 import { List } from '../../src/immutable';
 
+test('constructor creates new list', t => {
+    const xs = List(1,2,3);
+    t.is(xs.length, 3);
+});
+
+test('is iterable in correct order', t => {
+    const etalon = [1, '0xdeadbeef'];
+    const result = [];
+
+    const xs = List(1, '0xdeadbeef');
+
+    // Array.prototype.push adds to the end of the array.
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const x of xs) {
+        result.push(x);
+    }
+    t.deepEqual(result, etalon);
+});
+
 test('#head of empty throws an Error', t => {
     const xs = List();
     t.throws(() => {
@@ -45,32 +65,6 @@ test('#head returns first string', t => {
     t.is('0xdeadbeef', xs.head());
 });
 
-test('is iterable in correct order', t => {
-    const etalon = [1, '0xdeadbeef'];
-    const result = [];
-    const xs = List(1, '0xdeadbeef');
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const x of xs) {
-        result.push(x);
-    }
-
-    for (let i = 0; i < result.length; i += 1) {
-        t.true(result[i] === etalon[i]);
-    }
-});
-
-test('can be initialized from Array', t => {
-    const xs = List([1, 2, 3]);
-    t.is(xs.head(), 1);
-    t.is(xs.length, 3);
-});
-
-test('has length property', t => {
-    const xs = List(1, 2, 3);
-    t.is(xs.length, 3);
-});
-
 test('#at(index) returns element at index', t => {
     const xs = List(1, 2, 3);
     t.is(xs.at(0), 1);
@@ -83,15 +77,6 @@ test('#at throws RangeError on invalid index', t => {
     t.throws(() => {
         xs.at(10);
     }, RangeError);
-});
-
-test('#push adds an element to the top', t => {
-    const xs = List(1, 2, 3, 4);
-    const nxs = xs.push(6);
-    t.is(xs.head(), 1);
-    t.is(xs.length, 4);
-    t.is(nxs.head(), 6);
-    t.is(nxs.length, 5);
 });
 
 test('#atOr returns the element or default', t => {
@@ -111,6 +96,15 @@ test('#toArray creates new Array with list elements', t => {
     }
 });
 
+test('#push adds an element to the top', t => {
+    const xs = List(1, 2, 3, 4);
+    const nxs = xs.push(6);
+    t.is(xs.head(), 1);
+    t.is(xs.length, 4);
+    t.is(nxs.head(), 6);
+    t.is(nxs.length, 5);
+});
+
 test('#last throws exception if the list is empty', t => {
     const xs = List();
     t.throws(() => {
@@ -122,6 +116,7 @@ test('#last returns last element of the list', t => {
     const xs = List(1, 2, 'last');
     t.is(xs.last(), 'last');
 });
+
 
 test('#tail throws exception if the list is empty', t => {
     const xs = List();
@@ -136,41 +131,6 @@ test('#tail returns a new list minus first element', t => {
     t.is(xs.tail().at(0), 'two');
     t.is(xs.tail().tail().length, xs.length - 2);
     t.is(xs.tail().tail().at(0), 3);
-});
-
-// fixme: #testLinkage probalby can be imporeved.
-
-const testLinkage = (t, xs, a, b) => {
-    let i = a;
-    // eslint-disable-next-line no-underscore-dangle
-    let tmp = xs.__begin;
-    while (tmp) {
-        t.is(i, tmp.value);
-        tmp = tmp.next;
-        i += 1;
-    }
-    i = b;
-    // eslint-disable-next-line no-underscore-dangle
-    tmp = xs.__end;
-    while (tmp) {
-        t.is(i, tmp.value);
-        tmp = tmp.prev;
-        i -= 1;
-    }
-};
-
-test('is doubly linked list', t => {
-    const xs = List(1, 2, 3, 4);
-    testLinkage(t, xs, 1, 4);
-});
-
-test('result of #tail is doubly linked list', t => {
-    const xs1 = List(0, 1, 2, 3, 4);
-    const xs2 = xs1.tail();
-    t.is(xs1.head(), 0);
-    testLinkage(t, xs1, 0, 4);
-    t.is(xs2.head(), 1);
-    testLinkage(t, xs2, 1, 4);
 });
 
 test('#contains reports true correctly', t => {
@@ -190,6 +150,8 @@ test('#empty returns true when empty', t => {
     t.true(xs.empty());
 });
 
+/*
+
 test('#take return a list with first n elements', t => {
     const xs = List(1, 2, 3, 4, 5);
     const nxs = xs.take(3);
@@ -203,4 +165,6 @@ test('#take return a list with first n elements', t => {
     t.throws(() => {
         nxs.at(3)
     }, RangeError);
+    t.not(xs.__begin.next.next.next, null);
 });
+    */
