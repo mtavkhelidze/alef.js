@@ -118,11 +118,11 @@ class List {
      * @private
      */
     __dump() {
-        console.log(`BEGIN: ${this.__begin.id}`);
-        for (let tmp = this.__begin; tmp && tmp.next; tmp = tmp.next) {
-            console.log(`${tmp.value}: ${tmp.id} -> ${tmp.next.id}`);
+        console.log('BEGIN: ', this.__begin.id);
+        for (let x of this) {
+            console.log(x);
         }
-        console.log(`END: ${this.__end.id}`);
+        console.log('END: ', this.__end.id);
     }
 
 
@@ -133,15 +133,18 @@ class List {
      * @private
      */
     __populate(xs) {
-        const len = xs.length;
+        this.length = xs.length;
+
         this.__begin = Node();
         let tmp = this.__begin;
-        for (let i = 0; i < len; i += 1) {
+
+        for (let i = 0; i < this.length; i += 1) {
             tmp.value = xs[i];
             tmp.next = Node();
+
             this.__end = tmp;
             tmp = tmp.next;
-            this.length += 1;
+
         }
     }
 
@@ -150,9 +153,10 @@ class List {
      * @private
      */
     * __iter() {
-        for (let tmp = this.__begin; tmp && tmp.next; tmp = tmp.next) {
+        for (let tmp = this.__begin; tmp !== this.__end; tmp = tmp.next) {
             yield tmp.value;
         }
+        yield this.__end.value;
     }
 
     /**
@@ -272,13 +276,13 @@ class List {
      */
     take(n) {
         const xs = new List();
+        xs.length = n > this.length ? this.length : n;
+
         xs.__begin = this.__begin;
-        xs.length = n > this.__length ? this.__length : n;
-        let tmp = this.__begin;
-        for (let i = 1; i < xs.length; i += 1) {
-            tmp = tmp.next;
+        xs.__end = xs.__begin;
+        for (let i = 0; i < xs.length - 1; i += 1) {
+            xs.__end = xs.__end.next;
         }
-        xs.__end = new Node(tmp.value, null, tmp.prev);
         return xs;
     }
 
