@@ -30,13 +30,17 @@
 /**
  * Internal class.
  */
-class Node {
-    constructor(value, next, prev) {
-        this.value = value;
-        this.next = next || null;
-        this.prev = prev || null;
-    }
-}
+
+const Node = (value, next = null) => {
+    const id = Node.__id += 1;
+    return {
+        value,
+        next,
+        id
+    };
+};
+
+Node.__id = -1;
 
 /**
  * Scala style immutable List.
@@ -108,109 +112,42 @@ class List {
         }
     }
 
-    /**
-     * Selects first n elements.
-     *
-     * @param {Number} n the number of elements to take from this list.
-     * @returns {List} a list consisting only of the first n elements of
-     * this list, or else the whole list, if it has less than n elements.
-     */
-    take(n) {
-        const xs = new List();
-        xs.__begin = this.__begin;
-        xs.length = n > this.__length ? this.__length : n;
-        xs.__end = this.__begin;
-        for (let i = 1; i < xs.length; i += 1) {
-            xs.__end = xs.__end.next;
+    __dump() {
+        console.log(`BEGIN: ${this.__begin.id}`);
+        for (let tmp = this.__begin; tmp && tmp.next; tmp = tmp.next) {
+            console.log(`${tmp.value}: ${tmp.id} -> ${tmp.next.id}`);
         }
-        xs.__end.next = null;
-        return xs;
+        console.log(`END: ${this.__end.id}`);
     }
 
-    /**
-     * Returns true if List has no elements, false otherwise
-     *
-     * @returns {boolean}
-     */
-    empty() {
-        return this.__begin === null;
-    }
 
     /**
-     * Tests whether this sequence contains a given value as an element.
+     * Populates List with elements of `xs`
      *
-     * @param {*} val to look for
-     * @returns {boolean}
+     * @param {array} xs
+     * @private
      */
-
-    contains(val) {
+    __populate(xs) {
+        const len = xs.length;
+        this.__begin = Node();
         let tmp = this.__begin;
-        while (tmp) {
-            if (tmp.value === val) {
-                return true;
-            }
+        for (let i = 0; i < len; i += 1) {
+            tmp.value = xs[i];
+            tmp.next = Node();
+            this.__end = tmp;
             tmp = tmp.next;
+            this.length += 1;
         }
-        return false;
     }
 
     /**
-     * Selects last element.
-     *
-     * @returns {*}
-     * @throws {RangeError} if the list is empty.
+     * Iterator for `for of` constructs.
+     * @private
      */
-    last() {
-        if (this.__end) {
-            return this.__end.value;
+    * __iter() {
+        for (let tmp = this.__begin; tmp && tmp.next; tmp = tmp.next) {
+            yield tmp.value;
         }
-        throw new RangeError('The list is empty.');
-    }
-
-    /**
-     * Copies elements of the list into new Array
-     *
-     * @return {Array} array of values
-     */
-    toArray() {
-        const ar = new Array(this.length);
-        let tmp = this.__begin;
-        let i = 0;
-        while (tmp) {
-            ar[i] = tmp.value;
-            tmp = tmp.next;
-            i += 1;
-        }
-        return ar;
-    }
-
-    /**
-     * Returns new List with `x` added to the top.
-     *
-     * @param x
-     * @returns {List}
-     */
-    push(x) {
-        const nl = new List();
-        nl.__begin = new Node(x, this.__begin);
-        nl.__begin.next.prev = nl.__begin;
-        nl.length = this.length + 1;
-        return nl;
-    }
-
-    /**
-     * Selects all elements except the first.
-     *
-     * @returns {*}
-     */
-    tail() {
-        if (this.__begin) {
-            const nxs = new List();
-            nxs.__begin = this.__begin.next;
-            nxs.length = this.length - 1;
-            return nxs;
-        }
-        throw new RangeError('The list is empty.');
     }
 
     /**
@@ -221,10 +158,45 @@ class List {
      * @throws {RangeError} if the list is empty
      */
     head() {
-        if (this.__begin) {
+        if (this.length > 0) {
             return this.__begin.value;
         }
         throw new RangeError('The list is empty.');
+    }
+
+    /**
+     * Return element at position `ix`.
+     *
+     * @param {Number} ix positive integer
+     * @returns {*}
+     */
+    at(ix) {
+        if (ix < 0 || ix >= this.length) {
+            throw new RangeError('Index out of bounds.');
+        }
+
+        for (let tmp = this.__begin, i = 0;
+             tmp && tmp.next; tmp = tmp.next, i += 1) {
+            if (i === ix) {
+                return tmp.value;
+            }
+        }
+    }
+
+    /**
+     * Returns new List with `x` added to the top.
+     *
+     * @param x
+     * @returns {List}
+     */
+    push(x) {
+        const nl = new List();
+        const ex = Node(x);
+        ex.next = this.__begin;
+        nl.__begin = ex;
+        nl.__end = this.__end;
+        nl.length = this.length + 1;
+        return nl;
     }
 
     /**
@@ -243,69 +215,92 @@ class List {
     }
 
     /**
-     * Return element at position `ix`.
+     * Copies elements of the list into new Array
      *
-     * @param {Number} ix positive integer
+     * @return {Array} array of values
+     */
+    toArray() {
+        const ar = new Array(this.length);
+        let i = 0;
+        for (let tmp = this.__begin; tmp && tmp.next; tmp = tmp.next) {
+            ar[i] = tmp.value;
+            i += 1;
+        }
+        return ar;
+    }
+
+    /**
+     * Selects last element.
+     *
+     * @returns {*}
+     * @throws {RangeError} if the list is empty.
+     */
+    last() {
+        if (this.__end) {
+            return this.__end.value;
+        }
+        throw new RangeError('The list is empty.');
+    }
+
+    /**
+     * Selects all elements except the first.
+     *
      * @returns {*}
      */
-    at(ix) {
-        if (ix < 0 || ix >= this.length) {
-            throw new RangeError('Index out of bounds.');
+    tail() {
+        if (this.__begin) {
+            const nxs = new List();
+            nxs.__begin = this.__begin.next;
+            nxs.__end = this.__end;
+            nxs.length = this.length - 1;
+            return nxs;
         }
-
-        let tmp = null;
-        const len = this.length;
-
-        if (ix < len / 2) {
-            tmp = this.__begin;
-            for (let i = 0; i < ix; i += 1) {
-                tmp = tmp.next;
-            }
-        } else {
-            tmp = this.__end;
-            for (let i = len - 1; i > ix; i -= 1) {
-                tmp = tmp.prev;
-            }
-        }
-
-        return tmp.value;
+        throw new RangeError('The list is empty.');
     }
 
     /**
-     * Populates List with elements of `xs`
+     * Selects first n elements.
      *
-     * @param {array} xs
-     * @private
+     * @param {Number} n the number of elements to take from this list.
+     * @returns {List} a list consisting only of the first n elements of
+     * this list, or else the whole list, if it has less than n elements.
      */
-    __populate(xs) {
-        const len = xs.length;
-        for (let i = len - 1; i >= 0; i -= 1) {
-            const nx = new Node(xs[i]);
-            nx.next = this.__begin;
-
-            if (this.__begin) {
-                this.__begin.prev = nx;
-            }
-
-            this.__begin = nx;
-            if (this.__end === null) {
-                this.__end = nx;
-            }
-
-            this.length += 1;
-        }
-    }
-
-    /**
-     * Iterator for `for of` constructs.
-     * @private
-     */
-    * __iter() {
+    take(n) {
+        const xs = new List();
+        xs.__begin = this.__begin;
+        xs.length = n > this.__length ? this.__length : n;
         let tmp = this.__begin;
-        while (tmp !== null) {
-            yield tmp.value;
+        for (let i = 1; i < xs.length; i += 1) {
             tmp = tmp.next;
         }
+        xs.__end = new Node(tmp.value, null, tmp.prev);
+        return xs;
+    }
+
+    /**
+     * Returns true if List has no elements, false otherwise
+     *
+     * @returns {boolean}
+     */
+    empty() {
+        return this.__begin === null;
+    }
+
+    /**
+     * Tests whether this sequence contains a given value as an element.
+     *
+     * @param {*} val to look for
+     * @returns {boolean}
+     */
+    contains(val) {
+        let tmp = this.__begin;
+        while (tmp) {
+            if (tmp.value === val) {
+                return true;
+            }
+            tmp = tmp.next;
+        }
+        return false;
     }
 }
 
