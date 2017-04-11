@@ -33,7 +33,8 @@
  */
 
 const Node = (value, next = null) => {
-    const id = Node.__id += 1;
+    Node.__id += 1;
+    const id = Node.__id;
     return {
         value,
         next,
@@ -118,18 +119,17 @@ class List {
      * @private
      */
     __dump() {
-        console.log('BEGIN: ', this.__begin.id);
-        for (let x of this) {
-            console.log(x);
+        // eslint-disable-next-line no-restricted-syntax
+        for (const x of this) {
+            // eslint-disable-next-line no-console
+            console.log(x.id, x);
         }
-        console.log('END: ', this.__end.id);
     }
-
 
     /**
      * Populates List with elements of `xs`
      *
-     * @param {array} xs
+     * @param {Array} xs
      * @private
      */
     __populate(xs) {
@@ -144,7 +144,6 @@ class List {
 
             this.__end = tmp;
             tmp = tmp.next;
-
         }
     }
 
@@ -153,10 +152,11 @@ class List {
      * @private
      */
     * __iter() {
-        for (let tmp = this.__begin; tmp !== this.__end; tmp = tmp.next) {
+        let tmp = this.__begin;
+        for (let i = 0; i < this.length; i += 1) {
             yield tmp.value;
+            tmp = tmp.next;
         }
-        yield this.__end.value;
     }
 
     /**
@@ -177,19 +177,18 @@ class List {
      * Return element at position `ix`.
      *
      * @param {Number} ix positive integer
+     * @throws {RangeError} if index is out of bounds or negative
      * @returns {*}
      */
     at(ix) {
-        if (ix < 0 || ix >= this.length) {
-            throw new RangeError('Index out of bounds.');
-        }
-
-        for (let tmp = this.__begin, i = 0;
-             tmp && tmp.next; tmp = tmp.next, i += 1) {
+        let tmp = this.__begin;
+        for (let i = 0; i < this.length; i += 1) {
             if (i === ix) {
                 return tmp.value;
             }
+            tmp = tmp.next;
         }
+        throw new RangeError('Index out of bounds.');
     }
 
     /**
@@ -230,11 +229,13 @@ class List {
      */
     toArray() {
         const ar = new Array(this.length);
-        let i = 0;
-        for (let tmp = this.__begin; tmp && tmp.next; tmp = tmp.next) {
+
+        let tmp = this.__begin;
+        for (let i = 0; i < this.length; i += 1) {
             ar[i] = tmp.value;
-            i += 1;
+            tmp = tmp.next;
         }
+
         return ar;
     }
 
@@ -292,7 +293,7 @@ class List {
      * @returns {boolean}
      */
     empty() {
-        return this.__begin === null;
+        return this.length === 0;
     }
 
     /**
@@ -303,7 +304,7 @@ class List {
      */
     contains(value) {
         let tmp = this.__begin;
-        while (tmp) {
+        for (let i = 0; i < this.length; i += 1) {
             if (tmp.value === value) {
                 return true;
             }
