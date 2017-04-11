@@ -294,13 +294,13 @@ class List {
     /**
      * Tests whether this sequence contains a given value as an element.
      *
-     * @param {*} val to look for
+     * @param {*} value to look for
      * @returns {boolean}
      */
-    contains(val) {
+    contains(value) {
         let tmp = this.__begin;
         while (tmp) {
-            if (tmp.value === val) {
+            if (tmp.value === value) {
                 return true;
             }
             tmp = tmp.next;
