@@ -1,0 +1,6 @@
+{
+  "source": "./src",
+  "plugins": [
+    "plugins/markdown"
+  ]
+}
