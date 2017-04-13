@@ -156,4 +156,7 @@ test('#take return a list with first n elements', t => {
 
     t.is(xs.__begin, nxs.__begin);
     t.is(nxs.length, 3);
+    t.throws(() => {
+        nxs.at(3);
+    }, RangeError);
 });
