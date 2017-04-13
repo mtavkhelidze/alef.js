@@ -29,7 +29,7 @@ import test from 'ava';
 import { List } from '../../src/immutable';
 
 test('constructor creates new list', t => {
-    const xs = List(1,2,3);
+    const xs = List(1, 2, 3);
     t.is(xs.length, 3);
 });
 
@@ -150,7 +150,7 @@ test('#empty returns true when empty', t => {
     t.true(xs.empty());
 });
 
-test('#take return a list with first n elements', t => {
+test('#take returns a list with first n elements', t => {
     const xs = List(1, 2, 3, 4, 5);
     const nxs = xs.take(3);
 
@@ -159,4 +159,26 @@ test('#take return a list with first n elements', t => {
     t.throws(() => {
         nxs.at(3);
     }, RangeError);
+});
+
+test('#tekaRight throws Range error if the list is empty', t => {
+    const xs = List();
+    t.throws(() => {
+        xs.takeRight(10);
+    }, RangeError);
+});
+
+test('#takeRight returns the same list if n is greater than length', t => {
+    const xs = List(1, 2, 3, 4, 5, 6);
+    const nxs = xs.takeRight(10);
+    t.is(nxs, xs);
+});
+
+test('#takeRight returns new list with last n elements', t => {
+    const xs = List(1, 2, 3, 4, 5, 6);
+    const nxs = xs.takeRight(3);
+    t.is(nxs.length, 3);
+    for (let i = 0; i < 3; i += 1) {
+        t.is(nxs.at(i), xs.at(xs.length - 3 + i));
+    }
 });

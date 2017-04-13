@@ -119,11 +119,14 @@ class List {
      * @private
      */
     __dump() {
-        // eslint-disable-next-line no-restricted-syntax
-        for (const x of this) {
+        let tmp = this.__begin;
+        console.log('BEGIN', tmp.id);
+        for (let i = 0; i < this.length; i += 1) {
             // eslint-disable-next-line no-console
-            console.log(x.id, x);
+            console.log(tmp.id, tmp.value);
+            tmp = tmp.next;
         }
+        console.log('END', this.__end.id);
     }
 
     /**
@@ -157,6 +160,37 @@ class List {
             yield tmp.value;
             tmp = tmp.next;
         }
+    }
+
+    /**
+     * Returns a list with last n elements of original, or the whole list if
+     * n >= xs.length, or empty List if n == 0.
+     *
+     * @param {Number} n number of elements to return
+     * @returns {List}
+     * @throws {RangeError} if the list is empty or n &lt; 0
+     */
+    takeRight(n) {
+        if (this.length > 0) {
+            if (n < this.length) {
+                const xs = new List();
+
+                let tmp = this.__begin;
+                const len = this.length - n;
+
+                for (let i = 0; i < len; i += 1) {
+                    tmp = tmp.next;
+                }
+
+                xs.__begin = tmp;
+                xs.__end = this.__end;
+                xs.length = n;
+
+                return xs;
+            }
+            return this;
+        }
+        throw RangeError('The list is empty.');
     }
 
     /**
