@@ -15,9 +15,10 @@ Scala style immutable List.
 * [List](#List)
     * [List([...xs])](#new_List_new)
     * [.length](#List+length) : <code>number</code>
+    * [.takeRight(n)](#List+takeRight) ⇒ <code>[List](#List)</code>
     * [.head()](#List+head) ⇒ <code>\*</code>
     * [.at(ix)](#List+at) ⇒ <code>\*</code>
-    * [.push(x)](#List+push) ⇒ <code>[List](#List)</code>
+    * [.cons(x)](#List+cons) ⇒ <code>[List](#List)</code>
     * [.atOr(ix, xd)](#List+atOr) ⇒ <code>\*</code>
     * [.toArray()](#List+toArray) ⇒ <code>Array</code>
     * [.last()](#List+last) ⇒ <code>\*</code>
@@ -60,6 +61,21 @@ l.atOr(4, 'default'); // 'default'
 Length of the List
 
 **Access**: public  
+<a name="List+takeRight"></a>
+
+### list.takeRight(n) ⇒ <code>[List](#List)</code>
+Returns a list with last n elements of original, or the whole list if
+n >= xs.length, or empty List if n == 0.
+
+**Throws**:
+
+- <code>RangeError</code> if the list is empty or n &lt; 0
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| n | <code>Number</code> | number of elements to return |
+
 <a name="List+head"></a>
 
 ### list.head() ⇒ <code>\*</code>
@@ -76,14 +92,18 @@ the List is empty
 ### list.at(ix) ⇒ <code>\*</code>
 Return element at position `ix`.
 
+**Throws**:
+
+- <code>RangeError</code> if index is out of bounds or negative
+
 
 | Param | Type | Description |
 | --- | --- | --- |
 | ix | <code>Number</code> | positive integer |
 
-<a name="List+push"></a>
+<a name="List+cons"></a>
 
-### list.push(x) ⇒ <code>[List](#List)</code>
+### list.cons(x) ⇒ <code>[List](#List)</code>
 Returns new List with `x` added to the top.
 
 

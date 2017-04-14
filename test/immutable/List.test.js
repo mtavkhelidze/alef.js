@@ -96,9 +96,9 @@ test('#toArray creates new Array with list elements', t => {
     }
 });
 
-test('#push adds an element to the top', t => {
+test('#cons adds an element to the top', t => {
     const xs = List(1, 2, 3, 4);
-    const nxs = xs.push(6);
+    const nxs = xs.cons(6);
     t.is(xs.head(), 1);
     t.is(xs.length, 4);
     t.is(nxs.head(), 6);

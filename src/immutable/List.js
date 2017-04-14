@@ -231,7 +231,7 @@ class List {
      * @param x
      * @returns {List}
      */
-    push(x) {
+    cons(x) {
         const nl = new List();
         const ex = Node(x);
         ex.next = this.__begin;
