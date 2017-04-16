@@ -6,4 +6,7 @@ TODO.md
 .npmignore
 .gitignore
 .jsdoc2md.json
+/scripts/
+/src/algorithms/
+
 
