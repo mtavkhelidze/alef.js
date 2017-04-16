@@ -25,6 +25,16 @@
  * SOFTWARE.
  */
 
+// http://twistedoakstudios.com/blog/Post2096_making-an-immutable-queue-with-guaranteed-constant-time-operations
+// https://blogs.msdn.microsoft.com/ericlippert/tag/immutability/
+
+/**
+ * Make two Lists: in and out. When out is empty, convert (pivot) in into out.
+ *
+ * Although pivoting will guaranteed to require O(n), amortized enqueue and
+ * dequeue times will be O(1)
+ */
+
 /**
  * @private
  */
