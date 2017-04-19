@@ -14,6 +14,7 @@ Immutable Data Structures JavaScript Library
 * [Build](#build)
 * [Test](#test)
 * [Name](#name)
+* [Logo](#logo)
 
 ## Description
 
@@ -60,7 +61,7 @@ __immutability__, and __beer__:
 > 99 bottles of beer on the wall, 99 bottles of beer, Take one down, Put it
 > back up, 99 bottles of beer on the wall (repeat).
 
-### Logo
+## Logo
 
 The big semi-circle in the logo is Georgian [_asomtavruli_
 (ასომთავრული)](https://en.wikipedia.org/wiki/Georgian_scripts) *A*, _aleph_
