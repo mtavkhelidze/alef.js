@@ -25,15 +25,12 @@
 - **minimum**
 - **sum**
 - **product**
-- **elem**: same as **has**
 - comparison operators
     - gt
     - gte
     - lt
     - lte
     - eq
-- Fix **take** to return `[]` if `n <= 0` or if original list is empty for any
-`n`
 
 ## Add
  

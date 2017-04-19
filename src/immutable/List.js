@@ -27,22 +27,7 @@
 
 /* eslint-disable no-underscore-dangle */
 
-/**
- * Internal class.
- * @private
- */
-
-const Node = (value, next = null) => {
-    Node.__id += 1;
-    const id = Node.__id;
-    return {
-        value,
-        next,
-        id
-    };
-};
-
-Node.__id = -1;
+import Node from './Node';
 
 /**
  * Scala style immutable List.
@@ -59,106 +44,77 @@ Node.__id = -1;
  * // import X from 'alef.js';
  * // const List = X.List;
  *
- * const l = List(1,2,3);
+ * const l = new List(1, 'two', { three: true }); // or new List([1, 2, 3])
  * l.head(); // 1
- * l.tail(); // List(2,3)
- * l.at(2); // 3
+ * l.tail(); // List('two', { three: true })
+ * l.at(2); // { three: true }
+ * l.at(4) // throws RangeError
  * l.atOr(4, 'default'); // 'default'
  *
  */
+
 class List {
     /**
      * Creates instance of List
      *
      * @param {...*} [xs] arguments or an Array
      */
-    constructor(...xs) {
+    constructor(...args) {
         /**
-         * Length of the List
-         *
-         * @type {number}
-         * @public
+         * @private
          */
-        this.length = 0;
+        this.__length = 0;
 
         /**
-         * List head
-         *
-         * @type {Node}
          * @private
          */
         this.__begin = null;
 
         /**
-         * List tail
-         *
-         * @type {Node}
          * @private
          */
         this.__end = null;
 
-        /**
-         * List iterator function
-         *
-         * @type {function}
-         * @private
-         */
-        this[Symbol.iterator] = this.__iter;
+        if (args.length === 1 && Array.isArray(args[0])) {
+            this.__init(args[0]);
+        } else {
+            this.__init(args);
+        }
+    }
 
-        if (xs.length > 0) {
-            if (xs.length === 1 && Array.isArray(xs[0])) {
-                this.__populate(xs[0]);
-            } else {
-                this.__populate(xs);
+    get length() {
+        return this.__length;
+    }
+
+    __init(args) {
+        const len = args.length - 1;
+        for (let i = args.length - 1; i >= 0; i -= 1) {
+            this.__begin = new Node(args[i], this.__begin);
+            this.__length += 1;
+            if (i === len) {
+                this.__end = this.__begin;
             }
         }
     }
 
-    /**
-     * Dumps a List
-     * @private
-     */
-    __dump() {
-        let tmp = this.__begin;
-        console.log('BEGIN', tmp.id);
-        for (let i = 0; i < this.length; i += 1) {
-            // eslint-disable-next-line no-console
-            console.log(tmp.id, tmp.value);
-            tmp = tmp.next;
-        }
-        console.log('END', this.__end.id);
+    inspect() {
+        return `(List ${this.__inspect()})`;
     }
 
-    /**
-     * Populates List with elements of `xs`
-     *
-     * @param {Array} xs
-     * @private
-     */
-    __populate(xs) {
-        this.length = xs.length;
-
-        this.__begin = Node();
-        let tmp = this.__begin;
-
-        for (let i = 0; i < this.length; i += 1) {
-            tmp.value = xs[i];
-            tmp.next = Node();
-
-            this.__end = tmp;
-            tmp = tmp.next;
+    __inspect(node = this.__begin) {
+        if (node === this.__end) {
+            return `${node}`;
         }
+        return `${node} -> ${this.__inspect(node.next)}`;
     }
 
-    /**
-     * Iterator for `for of` constructs.
-     * @private
-     */
-    * __iter() {
-        let tmp = this.__begin;
-        for (let i = 0; i < this.length; i += 1) {
+    [Symbol.toStringTag]() {
+        return this.inspect();
+    }
+
+    * [Symbol.iterator]() {
+        for (let tmp = this.__begin; tmp !== null; tmp = tmp.next) {
             yield tmp.value;
-            tmp = tmp.next;
         }
     }
 
@@ -176,15 +132,15 @@ class List {
                 const xs = new List();
 
                 let tmp = this.__begin;
-                const len = this.length - n;
+                const firstN = this.length - n;
 
-                for (let i = 0; i < len; i += 1) {
+                for (let i = 0; i < firstN; i += 1) {
                     tmp = tmp.next;
                 }
 
                 xs.__begin = tmp;
                 xs.__end = this.__end;
-                xs.length = n;
+                xs.__length = n;
 
                 return xs;
             }
@@ -201,7 +157,7 @@ class List {
      * @throws {RangeError} if the list is empty
      */
     head() {
-        if (this.length > 0) {
+        if (this.__begin !== null) {
             return this.__begin.value;
         }
         throw new RangeError('The list is empty.');
@@ -215,12 +171,13 @@ class List {
      * @returns {*}
      */
     at(ix) {
-        let tmp = this.__begin;
-        for (let i = 0; i < this.length; i += 1) {
-            if (i === ix) {
-                return tmp.value;
+        let i = 0;
+        if (ix < this.length) {
+            for (let tmp = this.__begin; tmp !== null; tmp = tmp.next, i += 1) {
+                if (i === ix) {
+                    return tmp.value;
+                }
             }
-            tmp = tmp.next;
         }
         throw new RangeError('Index out of bounds.');
     }
@@ -233,11 +190,9 @@ class List {
      */
     cons(x) {
         const nl = new List();
-        const ex = Node(x);
-        ex.next = this.__begin;
-        nl.__begin = ex;
+        nl.__begin = new Node(x, this.__begin);
         nl.__end = this.__end;
-        nl.length = this.length + 1;
+        nl.__length = this.length + 1;
         return nl;
     }
 
@@ -263,11 +218,10 @@ class List {
      */
     toArray() {
         const ar = new Array(this.length);
+        let i = 0;
 
-        let tmp = this.__begin;
-        for (let i = 0; i < this.length; i += 1) {
+        for (let tmp = this.__begin; tmp !== null; tmp = tmp.next, i += 1) {
             ar[i] = tmp.value;
-            tmp = tmp.next;
         }
 
         return ar;
@@ -280,7 +234,7 @@ class List {
      * @throws {RangeError} if the list is empty.
      */
     last() {
-        if (this.__end) {
+        if (this.__end !== null) {
             return this.__end.value;
         }
         throw new RangeError('The list is empty.');
@@ -296,7 +250,7 @@ class List {
             const nxs = new List();
             nxs.__begin = this.__begin.next;
             nxs.__end = this.__end;
-            nxs.length = this.length - 1;
+            nxs.__length = this.length - 1;
             return nxs;
         }
         throw new RangeError('The list is empty.');
@@ -305,18 +259,23 @@ class List {
     /**
      * Selects first n elements.
      *
+     * The resulting list has only of the first n elements of
+     * this list, or all elements of original list, n is less than length,
+     * or empty list if n <= 0 or the list is empty.
+     *
      * @param {Number} n the number of elements to take from this list.
-     * @returns {List} a list consisting only of the first n elements of
-     * this list, or else the whole list, if it has less than n elements.
+     * @returns {List}
      */
     take(n) {
         const xs = new List();
-        xs.length = n > this.length ? this.length : n;
+        if (!this.empty() && n > 0) {
+            xs.__length = n > this.length ? this.length : n;
 
-        xs.__begin = this.__begin;
-        xs.__end = xs.__begin;
-        for (let i = 0; i < xs.length - 1; i += 1) {
-            xs.__end = xs.__end.next;
+            xs.__begin = this.__begin;
+            xs.__end = xs.__begin;
+            for (let i = 0; i < xs.length - 1; i += 1) {
+                xs.__end = xs.__end.next;
+            }
         }
         return xs;
     }
@@ -336,13 +295,11 @@ class List {
      * @param {*} value to look for
      * @returns {boolean}
      */
-    contains(value) {
-        let tmp = this.__begin;
-        for (let i = 0; i < this.length; i += 1) {
+    elem(value) {
+        for (let tmp = this.__begin; tmp !== null; tmp = tmp.next) {
             if (tmp.value === value) {
                 return true;
             }
-            tmp = tmp.next;
         }
         return false;
     }

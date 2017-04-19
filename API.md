@@ -1,8 +1,14 @@
 # alef.js
 
+![alef.js logo](graphics/alef.js.png)
+
 Immutable Data Structures JavaScript Library
 
 ---
+
+This file is automaticallty generated from comments in `src/`.
+
+For general description and installation instruction check [README](README.md).
 
 # API Documentation
 
@@ -14,7 +20,6 @@ Scala style immutable List.
 
 * [List](#List)
     * [List([...xs])](#new_List_new)
-    * [.length](#List+length) : <code>number</code>
     * [.takeRight(n)](#List+takeRight) ⇒ <code>[List](#List)</code>
     * [.head()](#List+head) ⇒ <code>\*</code>
     * [.at(ix)](#List+at) ⇒ <code>\*</code>
@@ -25,7 +30,7 @@ Scala style immutable List.
     * [.tail()](#List+tail) ⇒ <code>\*</code>
     * [.take(n)](#List+take) ⇒ <code>[List](#List)</code>
     * [.empty()](#List+empty) ⇒ <code>boolean</code>
-    * [.contains(value)](#List+contains) ⇒ <code>boolean</code>
+    * [.elem(value)](#List+elem) ⇒ <code>boolean</code>
 
 <a name="new_List_new"></a>
 
@@ -49,18 +54,13 @@ const List = require('alef.js').List;
 // import X from 'alef.js';
 // const List = X.List;
 
-const l = List(1,2,3);
+const l = new List(1, 'two', { three: true }); // or new List([1, 2, 3])
 l.head(); // 1
-l.tail(); // List(2,3)
-l.at(2); // 3
+l.tail(); // List('two', { three: true })
+l.at(2); // { three: true }
+l.at(4) // throws RangeError
 l.atOr(4, 'default'); // 'default'
 ```
-<a name="List+length"></a>
-
-### list.length : <code>number</code>
-Length of the List
-
-**Access**: public  
 <a name="List+takeRight"></a>
 
 ### list.takeRight(n) ⇒ <code>[List](#List)</code>
@@ -147,8 +147,10 @@ Selects all elements except the first.
 ### list.take(n) ⇒ <code>[List](#List)</code>
 Selects first n elements.
 
-**Returns**: <code>[List](#List)</code> - a list consisting only of the first n elements of
-this list, or else the whole list, if it has less than n elements.  
+The resulting list has only of the first n elements of
+this list, or all elements of original list, n is less than length,
+or empty list if n <= 0 or the list is empty.
+
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -159,9 +161,9 @@ this list, or else the whole list, if it has less than n elements.
 ### list.empty() ⇒ <code>boolean</code>
 Returns true if List has no elements, false otherwise
 
-<a name="List+contains"></a>
+<a name="List+elem"></a>
 
-### list.contains(value) ⇒ <code>boolean</code>
+### list.elem(value) ⇒ <code>boolean</code>
 Tests whether this sequence contains a given value as an element.
 
 
@@ -169,6 +171,3 @@ Tests whether this sequence contains a given value as an element.
 | --- | --- | --- |
 | value | <code>\*</code> | to look for |
 
-
----
-Automatically generated from comments in `src`.
