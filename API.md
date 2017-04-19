@@ -19,7 +19,7 @@ Scala style immutable List.
 
 
 * [List](#List)
-    * [List([...xs])](#new_List_new)
+    * [List([...args])](#new_List_new)
     * [.takeRight(n)](#List+takeRight) ⇒ <code>[List](#List)</code>
     * [.head()](#List+head) ⇒ <code>\*</code>
     * [.at(ix)](#List+at) ⇒ <code>\*</code>
@@ -34,13 +34,13 @@ Scala style immutable List.
 
 <a name="new_List_new"></a>
 
-### List([...xs])
+### List([...args])
 Creates instance of List
 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [...xs] | <code>\*</code> | arguments or an Array |
+| [...args] | <code>\*</code> | arguments or an Array |
 
 **Example**  
 ```js

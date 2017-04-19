@@ -57,7 +57,7 @@ class List {
     /**
      * Creates instance of List
      *
-     * @param {...*} [xs] arguments or an Array
+     * @param {...*} [args] arguments or an Array
      */
     constructor(...args) {
         /**
@@ -75,10 +75,21 @@ class List {
          */
         this.__end = null;
 
+        const __init = xs => {
+            const len = xs.length - 1;
+            for (let i = xs.length - 1; i >= 0; i -= 1) {
+                this.__begin = new Node(xs[i], this.__begin);
+                this.__length += 1;
+                if (i === len) {
+                    this.__end = this.__begin;
+                }
+            }
+        };
+
         if (args.length === 1 && Array.isArray(args[0])) {
-            this.__init(args[0]);
+            __init(args[0]);
         } else {
-            this.__init(args);
+            __init(args);
         }
     }
 
@@ -86,27 +97,16 @@ class List {
         return this.__length;
     }
 
-    __init(args) {
-        const len = args.length - 1;
-        for (let i = args.length - 1; i >= 0; i -= 1) {
-            this.__begin = new Node(args[i], this.__begin);
-            this.__length += 1;
-            if (i === len) {
-                this.__end = this.__begin;
-            }
-        }
-    }
-
     inspect() {
-        return `(List ${this.__inspect()})`;
+        const __inspect = (node = this.__begin) => {
+            if (node === this.__end) {
+                return `${node}`;
+            }
+            return `${node} -> ${__inspect(node.next)}`;
+        };
+        return `(List ${__inspect()})`;
     }
 
-    __inspect(node = this.__begin) {
-        if (node === this.__end) {
-            return `${node}`;
-        }
-        return `${node} -> ${this.__inspect(node.next)}`;
-    }
 
     [Symbol.toStringTag]() {
         return this.inspect();

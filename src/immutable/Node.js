@@ -3,6 +3,8 @@
  * @private
  */
 
+/* eslint-disable no-underscore-dangle */
+
 class Node {
     static set id(v) {
         Node.__id = v;
@@ -13,12 +15,12 @@ class Node {
     }
 
     static newId() {
-        return Node.id += 1;
+        Node.id += 1;
+        return Node.id;
     }
 
     constructor(value, next = null) {
-        this.__id = Node.id;
-        Node.id += 1;
+        this.__id = Node.newId();
         this.__value = value;
         this.__next = next;
     }
