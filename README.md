@@ -1,5 +1,7 @@
 # alef.js 
 
+![alef.js logo](graphics/alef.js.png)
+
 Immutable Data Structures JavaScript Library
 
 ---
@@ -57,3 +59,8 @@ __immutability__, and __beer__:
 
 > 99 bottles of beer on the wall, 99 bottles of beer, Take one down, Put it
 > back up, 99 bottles of beer on the wall (repeat).
+
+### Logo
+
+The big semi-circle in the logo is Georgian __asomtavruli__ (ასომთავრული)
+**A**, _aleph_ that is.
