@@ -25,9 +25,7 @@
  * SOFTWARE.
  */
 
-import _List from './List';
-
-const List = (...args) => new _List(...args);
+import List from './List';
 
 export {
     List
