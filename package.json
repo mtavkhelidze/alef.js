@@ -1,6 +1,6 @@
 {
   "name": "alef.js",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Immutable Data Structures JavaScript Library",
   "main": "./dist/index.js",
   "keywords": [
