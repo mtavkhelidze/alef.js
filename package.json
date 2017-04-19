@@ -16,7 +16,7 @@
     "test:watch": "ava test --verbose --fail-fast --watch",
     "build": "babel src --presets babel-preset-env --out-dir dist",
     "doc": "./scripts/jsdoc.sh",
-    "prepublish": "npm run clean && npm run build && npm run doc",
+    "prepublish": "npm run test && npm run clean && npm run build && npm run doc",
     "clean": "rm -fr dist"
   },
   "author": {
