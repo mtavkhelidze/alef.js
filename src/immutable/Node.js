@@ -14,13 +14,13 @@ class Node {
         return Node.__id;
     }
 
-    static newId() {
+    static get newId() {
         Node.id += 1;
         return Node.id;
     }
 
     constructor(value, next = null) {
-        this.__id = Node.newId();
+        this.__id = Node.newId;
         this.__value = value;
         this.__next = next;
     }

@@ -56,7 +56,9 @@ test('#constructor creates list from arguments', t => {
 test('#constructor creates list from Array', t => {
     const xs = new List([1, 2]);
     t.is(xs.length, 2);
+    // eslint-disable-next-line no-underscore-dangle
     t.is(xs.__begin.value, 1);
+    // eslint-disable-next-line no-underscore-dangle
     t.is(xs.__end.value, 2);
 });
 
@@ -66,6 +68,7 @@ test('is iterable in correct order', t => {
 
     const xs = new List(1, '0xdeadbeef');
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const x of xs) {
         after.push(x);
     }
@@ -163,7 +166,6 @@ test('#elem returns correct answer', t => {
     const xs = new List('one', undefined, null);
     t.true(xs.elem(null));
     t.true(xs.elem(undefined));
-    ``;
     t.true(xs.elem('one'));
     t.false(xs.elem('two'));
 });
@@ -177,6 +179,7 @@ test('#take returns a list with first n elements', t => {
     const xs = new List(1, 2, 3, 4, 5);
     const nxs = xs.take(3);
 
+    // eslint-disable-next-line no-underscore-dangle
     t.is(xs.__begin, nxs.__begin);
     t.is(nxs.length, 3);
 });
@@ -211,6 +214,7 @@ test('#takeRight returns new list with last n elements', t => {
     const nxs = xs.takeRight(3);
     t.is(nxs.length, 3);
     for (let i = 0; i < 3; i += 1) {
-        t.is(nxs.at(i), xs.at(xs.length - 3 + i));
+        t.is(nxs.at(i), xs.at((xs.length - 3) + i));
+        t.is(nxs.at(i), xs.at((xs.length - 3) + i));
     }
 });
