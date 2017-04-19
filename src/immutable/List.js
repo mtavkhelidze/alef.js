@@ -44,10 +44,11 @@ import Node from './Node';
  * // import X from 'alef.js';
  * // const List = X.List;
  *
- * const l = new List(1,2,3);
+ * const l = new List(1, 'two', { three: true }); // or new List([1, 2, 3])
  * l.head(); // 1
- * l.tail(); // List(2,3)
- * l.at(2); // 3
+ * l.tail(); // List('two', { three: true })
+ * l.at(2); // { three: true }
+ * l.at(4) // throws RangeError
  * l.atOr(4, 'default'); // 'default'
  *
  */
@@ -97,10 +98,17 @@ class List {
     }
 
     inspect() {
-        return `(List: ${this.__begin.inspect()})`;
+        return `(List ${this.__inspect()})`;
     }
 
-    get [Symbol.toStringTag]() {
+    __inspect(node = this.__begin) {
+        if (node === this.__end) {
+            return `${node}`;
+        }
+        return `${node} -> ${this.__inspect(node.next)}`;
+    }
+
+    [Symbol.toStringTag]() {
         return this.inspect();
     }
 
@@ -251,18 +259,23 @@ class List {
     /**
      * Selects first n elements.
      *
+     * The resulting list has only of the first n elements of
+     * this list, or all elements of original list, n is less than length,
+     * or empty list if n <= 0 or the list is empty.
+     *
      * @param {Number} n the number of elements to take from this list.
-     * @returns {List} a list consisting only of the first n elements of
-     * this list, or else the whole list, if it has less than n elements.
+     * @returns {List}
      */
     take(n) {
         const xs = new List();
-        xs.__length = n > this.length ? this.length : n;
+        if (!this.empty() && n > 0) {
+            xs.__length = n > this.length ? this.length : n;
 
-        xs.__begin = this.__begin;
-        xs.__end = xs.__begin;
-        for (let i = 0; i < xs.length - 1; i += 1) {
-            xs.__end = xs.__end.next;
+            xs.__begin = this.__begin;
+            xs.__end = xs.__begin;
+            for (let i = 0; i < xs.length - 1; i += 1) {
+                xs.__end = xs.__end.next;
+            }
         }
         return xs;
     }
@@ -277,7 +290,7 @@ class List {
     }
 
     /**
-     * Tests whether this sequence elem a given value as an element.
+     * Tests whether this sequence contains a given value as an element.
      *
      * @param {*} value to look for
      * @returns {boolean}

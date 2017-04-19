@@ -163,6 +163,7 @@ test('#elem returns correct answer', t => {
     const xs = new List('one', undefined, null);
     t.true(xs.elem(null));
     t.true(xs.elem(undefined));
+    ``;
     t.true(xs.elem('one'));
     t.false(xs.elem('two'));
 });
@@ -178,9 +179,18 @@ test('#take returns a list with first n elements', t => {
 
     t.is(xs.__begin, nxs.__begin);
     t.is(nxs.length, 3);
-    t.throws(() => {
-        nxs.at(3);
-    }, RangeError);
+});
+
+test('#take returns empty list if the list is empty', t => {
+    const xs = new List();
+    const nxs = xs.take(10);
+    t.true(nxs.empty());
+});
+
+test('#take returns empty list if n is negative', t => {
+    const xs = new List(1, 3, 34);
+    const nxs = xs.take(-10);
+    t.true(nxs.empty());
 });
 
 test('#tekaRight throws Range error if the list is empty', t => {
