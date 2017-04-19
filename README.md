@@ -63,5 +63,5 @@ __immutability__, and __beer__:
 ### Logo
 
 The big semi-circle in the logo is Georgian [_asomtavruli_
-(ასომთავრული)](https://en.wikipedia.org/wiki/Georgian_scripts) *A**, _aleph_
+(ასომთავრული)](https://en.wikipedia.org/wiki/Georgian_scripts) *A*, _aleph_
 that is.
