@@ -277,12 +277,12 @@ class List {
     }
 
     /**
-     * Tests whether this sequence contains a given value as an element.
+     * Tests whether this sequence elem a given value as an element.
      *
      * @param {*} value to look for
      * @returns {boolean}
      */
-    contains(value) {
+    elem(value) {
         for (let tmp = this.__begin; tmp !== null; tmp = tmp.next) {
             if (tmp.value === value) {
                 return true;

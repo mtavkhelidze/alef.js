@@ -159,12 +159,12 @@ test('#tail returns a new list minus first element', t => {
     t.is(t2.at(0), 3);
 });
 
-test('#contains returns correct answer', t => {
+test('#elem returns correct answer', t => {
     const xs = new List('one', undefined, null);
-    t.true(xs.contains(null));
-    t.true(xs.contains(undefined));
-    t.true(xs.contains('one'));
-    t.false(xs.contains('two'));
+    t.true(xs.elem(null));
+    t.true(xs.elem(undefined));
+    t.true(xs.elem('one'));
+    t.false(xs.elem('two'));
 });
 
 test('#empty returns true when empty', t => {
