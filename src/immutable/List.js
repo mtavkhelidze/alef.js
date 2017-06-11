@@ -127,7 +127,7 @@ class List {
      * @throws {RangeError} if the list is empty or n &lt; 0
      */
     takeRight(n) {
-        if (this.length > 0) {
+        if (this.__begin !== null) {
             if (n < this.length) {
                 const xs = new List();
 

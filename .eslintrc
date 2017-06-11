@@ -3,11 +3,11 @@
   "rules": {
     "indent": [ 2, 4 ],
     "padded-blocks": ["error", "never"],
-    "space-before-function-paren": 2,
+    "space-before-function-paren": "off",
     "quotes": 2,
     "import/prefer-default-export": 0,
     "array-bracket-spacing": 2,
-    "comma-dangle": 2,
+    "comma-dangle": ["error", "always-multiline"],
     "arrow-parens": "off",
     "react/jsx-indent": "off",
     "react/jsx-first-prop-new-line": 0,
