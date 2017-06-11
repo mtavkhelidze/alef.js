@@ -25,14 +25,14 @@
  * SOFTWARE.
  */
 
-import 'babel-polyfill';
+import "babel-polyfill";
 
-import { List } from './immutable';
+import { List } from "./immutable";
 
 export default {
-    List
+    List,
 };
 
 export {
-    List
+    List,
 };

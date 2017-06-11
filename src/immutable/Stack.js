@@ -29,11 +29,24 @@
  * @private
  */
 class Stack {
-    push(x) {}
-    pop(x) {}
-    peek() {}
-    clear() {}
-    count() {}
-    empty() {}
-    full() {}
+    push(x) {
+    }
+
+    pop(x) {
+    }
+
+    peek() {
+    }
+
+    clear() {
+    }
+
+    count() {
+    }
+
+    empty() {
+    }
+
+    full() {
+    }
 }

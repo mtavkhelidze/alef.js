@@ -27,7 +27,7 @@
 
 /* eslint-disable no-underscore-dangle */
 
-import Node from './Node';
+import Node from "./Node";
 
 /**
  * Scala style immutable List.
@@ -146,7 +146,7 @@ class List {
             }
             return this;
         }
-        throw RangeError('The list is empty.');
+        throw RangeError("The list is empty.");
     }
 
     /**
@@ -160,7 +160,7 @@ class List {
         if (this.__begin !== null) {
             return this.__begin.value;
         }
-        throw new RangeError('The list is empty.');
+        throw new RangeError("The list is empty.");
     }
 
     /**
@@ -179,7 +179,7 @@ class List {
                 }
             }
         }
-        throw new RangeError('Index out of bounds.');
+        throw new RangeError("Index out of bounds.");
     }
 
     /**
@@ -237,7 +237,7 @@ class List {
         if (this.__end !== null) {
             return this.__end.value;
         }
-        throw new RangeError('The list is empty.');
+        throw new RangeError("The list is empty.");
     }
 
     /**
@@ -253,7 +253,7 @@ class List {
             nxs.__length = this.length - 1;
             return nxs;
         }
-        throw new RangeError('The list is empty.');
+        throw new RangeError("The list is empty.");
     }
 
     /**

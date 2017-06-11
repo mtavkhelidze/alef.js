@@ -39,10 +39,21 @@
  * @private
  */
 class Queue {
-    enqueue() {}
-    dequeue() {}
-    peek() {}
-    count() {}
-    empty() {}
-    full() {}
+    enqueue() {
+    }
+
+    dequeue() {
+    }
+
+    peek() {
+    }
+
+    count() {
+    }
+
+    empty() {
+    }
+
+    full() {
+    }
 }
